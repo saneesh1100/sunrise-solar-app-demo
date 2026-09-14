@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunrise Energy Solutions - Complete Enterprise App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    .brand-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+    }
+    .brand-input {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+    }
+    .brand-input:focus {
+      border-color: #e54d38;
+      background: #ffffff;
+      outline: none;
+    }
+    .brand-gradient {
+      background: linear-gradient(135deg, #e54d38 0%, #f97316 100%);
+    }
+    .brand-glow {
+      box-shadow: 0 8px 25px -4px rgba(229, 77, 56, 0.35);
+    }
+    .text-brand {
+      color: #e54d38;
+    }
+    .bg-brand {
+      background-color: #e54d38;
+    }
+    .border-brand {
+      border-color: #e54d38;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-0 md:p-6 bg-slate-100">
+  
+  <!-- Header Control Bar with Quick Shortcuts -->
+  <div class="w-full max-w-md bg-white border-b md:border border-gray-200 md:rounded-2xl p-2.5 mb-0 md:mb-3 flex items-center justify-between shadow-sm z-10">
+    <div class="flex items-center space-x-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-brand animate-pulse"></span>
+      <span class="text-xs font-bold text-gray-700">Sunrise Energy</span>
+    </div>
+    <div class="flex items-center space-x-1.5">
+      <button onclick="quickLaunchJeeva()" class="px-2 py-1 rounded-lg text-[11px] font-extrabold bg-red-100 text-brand hover:bg-red-200 transition flex items-center gap-1">
+        <i class="fa-solid fa-user-tag"></i> Jeeva (Sales Rep)
+      </button>
+      <button onclick="quickLaunchOwner()" class="px-2 py-1 rounded-lg text-[11px] font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-1">
+        <i class="fa-solid fa-user-shield"></i> Owner View
+      </button>
+      <button onclick="showLoginScreen()" class="px-2 py-1 rounded-lg text-[11px] font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 transition flex items-center gap-1">
+        <i class="fa-solid fa-right-to-bracket"></i> Login
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Device Shell Frame (Fluid Native Mobile View on Phone/Tablet, Mockup Frame on Desktop) -->
+  <div class="w-full md:max-w-md h-[calc(100vh-48px)] md:h-[830px] bg-white md:rounded-[38px] shadow-2xl overflow-hidden flex flex-col relative md:border-[7px] md:border-gray-900">
+    
+    <!-- Phone Notch Header -->
+    <div class="bg-gray-900 px-6 pt-2.5 pb-1.5 flex justify-between items-center text-xs text-gray-300 select-none">
+      <span class="font-medium">9:41</span>
+      <div class="w-20 h-3.5 bg-black rounded-full mx-auto"></div>
+      <div class="flex items-center space-x-1.5 text-[10px]">
+        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-battery-full"></i>
+      </div>
+    </div>
+
+    <!-- App Header Bar -->
+    <div id="app-header" class="hidden px-3.5 py-2 border-b border-gray-100 flex items-center justify-between bg-white shadow-sm">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 rounded-xl bg-brand flex items-center justify-center text-white shadow-md p-1">
+          <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3v2M7 6l1.5 1.5M17 6l-1.5 1.5M4 11h2M18 11h2" stroke-linecap="round"/>
+            <path d="M8 11a4 4 0 0 1 8 0" stroke-linecap="round"/>
+            <path d="M6 14h12l2 6H4l2-6z"/>
+            <path d="M12 14v6M8 17h8"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h1 class="text-xs font-black text-gray-900 tracking-tight leading-none" id="hdr-staff-name">Jeeva</h1>
+            <span id="hdr-staff-badge" class="text-[8px] bg-red-100 text-brand px-1.5 py-0.2 rounded font-extrabold">Sales Rep</span>
+          </div>
+          <span class="text-[9px] text-gray-400 font-bold block leading-tight">SUNRISE ENERGY • KOZHIKODE</span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <button onclick="toggleNotificationDrawer()" class="relative w-8 h-8 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center hover:bg-gray-200 transition">
+          <i class="fa-solid fa-bell text-xs"></i>
+          <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-brand text-white text-[9px] font-black flex items-center justify-center animate-bounce">3</span>
+        </button>
+
+        <button onclick="showLoginScreen()" class="text-[10px] bg-gray-100 text-gray-700 px-2 py-1.5 rounded-xl font-bold hover:bg-gray-200 flex items-center gap-1">
+          <i class="fa-solid fa-right-from-bracket text-brand"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN BODY CONTENT PANELS -->
+    <div class="flex-1 overflow-y-auto relative bg-slate-50" id="app-body">
+      
+      <!-- ENTERPRISE STAFF SIGN IN SCREEN -->
+      <div id="pane-login" class="view-pane p-6 flex flex-col justify-between h-full bg-white">
+        <div class="text-center pt-2 space-y-2">
+          <div class="w-20 h-24 rounded-2xl bg-brand border-4 border-white p-2 text-white flex flex-col items-center justify-center mx-auto shadow-xl brand-glow">
+            <svg class="w-10 h-10 text-white mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v2M7 6l1.5 1.5M17 6l-1.5 1.5M4 11h2M18 11h2" stroke-linecap="round"/>
+              <path d="M8 11a4 4 0 0 1 8 0" stroke-linecap="round"/>
+              <path d="M6 14h12l2 6H4l2-6z"/>
+              <path d="M12 14v6M8 17h8"/>
+            </svg>
+            <span class="text-[8px] font-black tracking-tighter uppercase leading-tight">Sunrise<br>Energy<br>Solutions</span>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-brand tracking-widest uppercase">Sunrise Energy Solutions</p>
+            <p class="text-[10px] text-gray-400 font-medium">Internal Enterprise Portal • Kozhikode</p>
+          </div>
+        </div>
+
+        <div class="space-y-3.5 my-auto">
+          <div class="p-2 bg-slate-50 border border-gray-200 rounded-xl space-y-1">
+            <div class="flex justify-between items-center text-[10px]">
+              <span class="font-bold text-gray-700"><i class="fa-solid fa-wand-magic-sparkles text-brand mr-1"></i> Quick Role Auto-Fill:</span>
+            </div>
+            <select id="demo-account-select" onchange="autoFillDemoAccount()" class="w-full bg-white border border-gray-300 rounded-lg px-2 py-1 text-xs font-bold text-gray-800 focus:border-brand">
+              <option value="jeeva" selected>Field Sales Rep: Jeeva (jeeva@sunriseenergysolutions.in)</option>
+              <option value="owner">Company Owner: Subeesh (subeesh@sunriseenergysolutions.in)</option>
+              <option value="deepthi">Office Assistant: Deepthi (deepthi@sunriseenergysolutions.in)</option>
+              <option value="rahul">Maintenance Tech: Rahul (rahul.service@sunriseenergysolutions.in)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="text-xs font-semibold text-gray-700 mb-1 block">Staff Email Address</label>
+            <div class="relative">
+              <i class="fa-solid fa-envelope absolute left-3 top-3 text-xs text-gray-400"></i>
+              <input type="email" id="login-email" value="jeeva@sunriseenergysolutions.in" class="w-full brand-input rounded-xl pl-9 pr-3 py-2.5 text-xs font-medium focus:border-brand" />
+            </div>
+          </div>
+
+          <div>
+            <label class="text-xs font-semibold text-gray-700 mb-1 block">Password</label>
+            <div class="relative">
+              <i class="fa-solid fa-lock absolute left-3 top-3 text-xs text-gray-400"></i>
+              <input type="password" id="login-password" value="••••••••" class="w-full brand-input rounded-xl pl-9 pr-9 py-2.5 text-xs font-medium focus:border-brand" />
+            </div>
+            <div class="text-right mt-1.5">
+              <a href="#" onclick="openForgotPasswordModal()" class="text-[11px] font-extrabold text-brand hover:underline">Forgot Password?</a>
+            </div>
+          </div>
+
+          <button onclick="performLogin()" class="w-full py-3.5 brand-gradient text-white font-extrabold rounded-xl text-sm shadow-xl brand-glow flex items-center justify-center gap-2">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In
+          </button>
+        </div>
+
+        <div class="text-center text-[10px] text-gray-400 font-medium pb-1">
+          <p><i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> Sunrise Energy Internal System • Kozhikode HQ</p>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- 1. HOME DASHBOARD TAB                      -->
+      <!-- ========================================== -->
+      <div id="app-tab-home" class="view-pane hidden p-4 space-y-3.5">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-extrabold text-gray-900" id="home-welcome-title">Welcome Back, Jeeva</h2>
+            <p class="text-[10px] text-brand font-bold" id="home-welcome-sub">Field Sales Representative • Kozhikode</p>
+          </div>
+          <button id="home-new-survey-btn" onclick="switchTab('leads')" class="text-[10px] bg-brand text-white px-2.5 py-1.5 rounded-xl font-extrabold shadow-sm flex items-center gap-1">
+            <i class="fa-solid fa-plus-circle"></i> + New Site Audit
+          </button>
+        </div>
+
+        <!-- Dynamic Role Widgets Container -->
+        <div id="home-role-widgets" class="space-y-3">
+          <!-- Will be rendered dynamically via updateHomeDashboard() -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- 2. FULL 4-STEP CUSTOMER SITE AUDIT         -->
+      <!-- ========================================== -->
+      <div id="app-tab-leads" class="view-pane hidden p-4 space-y-4">
+        
+        <!-- STEP 1 OF 4 -->
+        <div id="step-1" class="step-pane space-y-3.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold tracking-wider text-brand uppercase">Step 1 of 4</span>
+              <h2 class="text-base font-extrabold text-gray-900">Customer & Site Feasibility</h2>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-red-50 text-brand flex items-center justify-center font-bold text-xs border border-red-100">1/4</div>
+          </div>
+          <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-brand h-full w-1/4"></div>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="font-semibold text-gray-700 mb-1 block">Customer Full Name *</label>
+              <input type="text" value="Dr. Rajesh Kumar" class="w-full brand-input rounded-xl px-3 py-2 font-medium focus:border-brand" />
+            </div>
+
+            <div>
+              <label class="font-bold text-brand mb-1 block flex justify-between">
+                <span>Installation Property Type *</span>
+                <span class="text-[10px] text-gray-400 font-normal">KSEB Tariff Category</span>
+              </label>
+              <select class="w-full brand-input rounded-xl px-3 py-2 text-xs font-bold text-gray-900 focus:border-brand">
+                <option selected>Residential Independent Villa / House (Domestic)</option>
+                <option>Apartment Building / Residential Society</option>
+                <option>Commercial Shop / Retail Showroom</option>
+                <option>Commercial Office Building / Tech Park</option>
+                <option>Industrial Factory / Warehouse</option>
+                <option>Educational School / College Institution</option>
+                <option>Hospital / Healthcare Facility</option>
+                <option>Agricultural Farm / Pump Station</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="font-semibold text-gray-700 mb-1 block">Contact Phone Number *</label>
+              <input type="tel" value="+91 98470 12345" class="w-full brand-input rounded-xl px-3 py-2 font-medium focus:border-brand" />
+            </div>
+
+            <div>
+              <label class="font-bold text-brand mb-1 block">Customer Email Address *</label>
+              <input type="email" value="rajesh.kumar@gmail.com" class="w-full brand-input rounded-xl px-3 py-2 text-xs font-bold text-gray-900 focus:border-brand" placeholder="customer@gmail.com" />
+            </div>
+
+            <div>
+              <label class="font-semibold text-gray-700 mb-1 block">Site Address (Kozhikode) *</label>
+              <textarea rows="2" class="w-full brand-input rounded-xl px-3 py-2 font-medium focus:border-brand">Mavoor Road, Near Focus Mall, Kozhikode</textarea>
+            </div>
+
+            <!-- GPS LOCATION PERMISSION ACTIVE BOX -->
+            <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-bold text-emerald-800 flex items-center gap-1">
+                  <i class="fa-solid fa-location-crosshairs text-emerald-600"></i> GPS Location Permission Active
+                </span>
+                <span class="text-[9px] bg-emerald-200 text-emerald-800 px-1.5 py-0.2 rounded font-extrabold">ALLOWED</span>
+              </div>
+              <div class="bg-white px-2 py-1 rounded border border-emerald-200 text-[10px] font-bold text-gray-800 flex justify-between">
+                <span>Lat: 11.2588° N, Long: 75.7804° E</span>
+                <span class="text-brand">Pin: 673004</span>
+              </div>
+            </div>
+
+            <!-- YES/NO QUESTIONS - STEP 1 -->
+            <div class="bg-white p-3 rounded-xl border border-gray-200 space-y-2">
+              <span class="text-[10px] font-bold text-brand uppercase block border-b border-gray-100 pb-1">Site Feasibility Verification</span>
+              <div class="flex justify-between items-center text-[11px]">
+                <span class="text-gray-700 font-semibold">Is customer legal property owner?</span>
+                <div class="flex gap-2">
+                  <label class="flex items-center gap-1 cursor-pointer font-bold text-emerald-600"><input type="radio" name="q_owner" checked class="accent-brand" /> Yes</label>
+                  <label class="flex items-center gap-1 cursor-pointer font-medium text-gray-500"><input type="radio" name="q_owner" class="accent-brand" /> No</label>
+                </div>
+              </div>
+              <div class="flex justify-between items-center text-[11px]">
+                <span class="text-gray-700 font-semibold">Is 3-Phase power available at site?</span>
+                <div class="flex gap-2">
+                  <label class="flex items-center gap-1 cursor-pointer font-bold text-emerald-600"><input type="radio" name="q_phase" checked class="accent-brand" /> Yes</label>
+                  <label class="flex items-center gap-1 cursor-pointer font-medium text-gray-500"><input type="radio" name="q_phase" class="accent-brand" /> No</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="goToStep(2)" class="w-full py-3 brand-gradient text-white font-bold rounded-xl text-xs shadow-md brand-glow flex items-center justify-center gap-2">
+            Next: KSEB Assessment <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+        <!-- STEP 2 OF 4 -->
+        <div id="step-2" class="step-pane hidden space-y-3.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold tracking-wider text-brand uppercase">Step 2 of 4</span>
+              <h2 class="text-base font-extrabold text-gray-900">KSEB & Electrical Assessment</h2>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-red-50 text-brand flex items-center justify-center font-bold text-xs border border-red-100">2/4</div>
+          </div>
+          <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-brand h-full w-2/4"></div>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="font-semibold text-gray-700 mb-1 block">Average Bi-Monthly KSEB Bill (₹)</label>
+              <input type="number" value="14500" class="w-full brand-input rounded-xl px-3 py-2 font-medium focus:border-brand" />
+            </div>
+
+            <div class="bg-white p-3 rounded-xl border border-gray-200 space-y-2">
+              <span class="text-[10px] font-bold text-brand uppercase block border-b border-gray-100 pb-1">KSEB Compliance Check</span>
+              <div class="flex justify-between items-center text-[11px]">
+                <span class="text-gray-700 font-semibold">KSEB name matches property owner?</span>
+                <div class="flex gap-2">
+                  <label class="flex items-center gap-1 cursor-pointer font-bold text-emerald-600"><input type="radio" name="q_kseb_name" checked class="accent-brand" /> Yes</label>
+                  <label class="flex items-center gap-1 cursor-pointer font-medium text-gray-500"><input type="radio" name="q_kseb_name" class="accent-brand" /> No</label>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="font-semibold text-gray-700 mb-1 block">KSEB Electricity Bill Photo *</label>
+              <div class="border-2 border-dashed border-red-300 rounded-xl p-2.5 text-center bg-red-50/50 cursor-pointer">
+                <p class="text-xs text-gray-800 font-bold">kseb_bill_kozhikode.jpg (1.4 MB)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button onclick="goToStep(1)" class="w-1/3 py-2.5 bg-white border border-gray-300 text-gray-700 font-bold rounded-xl text-xs">Back</button>
+            <button onclick="goToStep(3)" class="w-2/3 py-2.5 brand-gradient text-white font-bold rounded-xl text-xs shadow-md brand-glow">Next: Roof Assessment <i class="fa-solid fa-arrow-right text-xs"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 3 OF 4 -->
+        <div id="step-3" class="step-pane hidden space-y-3.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold tracking-wider text-brand uppercase">Step 3 of 4</span>
+              <h2 class="text-base font-extrabold text-gray-900">Roof Inspection</h2>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-red-50 text-brand flex items-center justify-center font-bold text-xs border border-red-100">3/4</div>
+          </div>
+          <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-brand h-full w-3/4"></div>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="font-semibold text-gray-700 mb-1 block">Roof Type</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button class="py-2 px-2 rounded-xl border-2 border-brand bg-red-50 text-xs font-bold text-brand">Flat RCC Roof</button>
+                <button class="py-2 px-2 rounded-xl border border-gray-300 bg-white text-xs font-medium text-gray-600">Sloped Tile Roof</button>
+              </div>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-gray-200 space-y-2">
+              <div class="flex justify-between items-center text-[11px]">
+                <span class="text-gray-700 font-semibold">100% Shadow-free (9 AM - 4 PM)?</span>
+                <div class="flex gap-2">
+                  <label class="flex items-center gap-1 cursor-pointer font-bold text-emerald-600"><input type="radio" name="q_shadow" checked class="accent-brand" /> Yes</label>
+                  <label class="flex items-center gap-1 cursor-pointer font-medium text-gray-500"><input type="radio" name="q_shadow" class="accent-brand" /> No</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button onclick="goToStep(2)" class="w-1/3 py-2.5 bg-white border border-gray-300 text-gray-700 font-bold rounded-xl text-xs">Back</button>
+            <button onclick="goToStep(4)" class="w-2/3 py-2.5 brand-gradient text-white font-bold rounded-xl text-xs shadow-md brand-glow">Next: System Selection <i class="fa-solid fa-arrow-right text-xs"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 4 OF 4 -->
+        <div id="step-4" class="step-pane hidden space-y-3.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold tracking-wider text-amber-500 uppercase">Step 4 of 4</span>
+              <h2 class="text-base font-extrabold text-gray-900">System Capacity & Proposal</h2>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xs border border-amber-200">4/4</div>
+          </div>
+          <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-amber-500 h-full w-full"></div>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="font-bold text-gray-900 mb-1 block">Select Required Solar Capacity (kW) *</label>
+              <select class="w-full brand-input rounded-xl px-3 py-2 text-xs font-extrabold text-brand focus:border-brand">
+                <option>3 kW System (Ideal for ₹ 5,000 - ₹ 8,000 Bill)</option>
+                <option selected>5 kW System (Ideal for ₹ 12,000 - ₹ 16,000 Bill)</option>
+                <option>8 kW System (Ideal for Large Villas / Commercial)</option>
+                <option>10 kW System (3-Phase Heavy Load)</option>
+              </select>
+            </div>
+
+            <div class="brand-card rounded-xl p-3 border-2 border-red-200 bg-gradient-to-br from-red-50 to-orange-50 space-y-1">
+              <div class="flex justify-between items-center">
+                <span class="text-[10px] text-gray-500 font-extrabold uppercase">Recommended Plan</span>
+                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.2 rounded-full">Optimal Match</span>
+              </div>
+              <h4 class="text-base font-black text-brand">5 kW On-Grid System</h4>
+              <div class="text-xs text-gray-600 flex justify-between"><span>Est. Savings:</span> <strong class="text-emerald-600">₹ 5,200/mo</strong></div>
+            </div>
+
+            <div>
+              <label class="font-bold text-gray-800 mb-1 block">System Battery Connection Type *</label>
+              <select class="w-full brand-input rounded-xl px-3 py-2 text-xs font-bold text-gray-900 focus:border-brand">
+                <option selected>On-Grid System (Grid-Tied for KSEB Net Metering)</option>
+                <option>Hybrid System (Grid-Tied + Battery Backup Storage)</option>
+                <option>Off-Grid System (Standalone Battery Backup without Grid)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex gap-2 pt-1">
+            <button onclick="goToStep(3)" class="w-1/3 py-2.5 bg-white border border-gray-300 text-gray-700 font-bold rounded-xl text-xs">Back</button>
+            <button onclick="submitEnquiry()" class="w-2/3 py-2.5 brand-gradient text-white font-extrabold rounded-xl text-xs shadow-xl brand-glow flex items-center justify-center gap-1">
+              <i class="fa-solid fa-paper-plane"></i> Submit & Send Emails
+            </button>
+          </div>
+        </div>
+
+        <!-- SUCCESS SCREEN -->
+        <div id="step-success" class="step-pane hidden text-center space-y-3 py-5">
+          <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 border-2 border-emerald-400 flex items-center justify-center mx-auto text-2xl animate-bounce">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <h2 class="text-lg font-extrabold text-gray-900">Enquiry Submitted & Emailed!</h2>
+          <p class="text-xs text-gray-600 max-w-xs mx-auto font-medium">
+            Solar site audit report & quotation PDF generated and emailed to both owner & customer.
+          </p>
+          <button onclick="goToStep(1)" class="w-full py-3 brand-gradient text-white font-bold rounded-xl text-xs shadow-md">
+            Start New Site Audit
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ========================================== -->
+      <!-- 3. INVENTORY MANAGEMENT MODULE             -->
+      <!-- ========================================== -->
+      <div id="app-tab-inventory" class="view-pane hidden p-4 space-y-3">
+        <div class="flex justify-between items-center">
+          <h2 class="text-sm font-extrabold text-gray-900">Solar & Electrical Inventory</h2>
+          <button onclick="alert('Restock ordered!')" class="text-[10px] bg-gray-900 text-white px-2.5 py-1.5 rounded-xl font-bold">+ Restock</button>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <div class="brand-card rounded-xl p-3">
+            <h4 class="font-bold text-gray-900 text-xs">Waaree 540W Mono PERC Panels</h4>
+            <span class="text-[10px] text-emerald-700 font-bold">140 Panels in Stock</span>
+          </div>
+          <div class="brand-card rounded-xl p-3 border-l-4 border-l-amber-500 bg-amber-50/20">
+            <h4 class="font-bold text-gray-900 text-xs">SS304 Roofing Screws & Fasteners</h4>
+            <span class="text-[10px] text-amber-800 font-bold">Low Stock: 450 Pcs Only!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- 4. EDITABLE PROFILE & SETTINGS             -->
+      <!-- ========================================== -->
+      <div id="app-tab-profile" class="view-pane hidden p-4 space-y-3.5">
+        <div class="flex items-center space-x-3 bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-brand text-white font-black flex items-center justify-center text-lg shadow-md" id="prof-avatar-badge">
+            JV
+          </div>
+          <div>
+            <h2 class="text-sm font-extrabold text-gray-900" id="prof-disp-name">Jeeva</h2>
+            <p class="text-[11px] text-brand font-semibold" id="prof-disp-role">Sales Rep</p>
+            <span class="text-[10px] text-gray-500"><i class="fa-solid fa-location-dot text-brand"></i> Kozhikode Head Office</span>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-3.5 border border-gray-200 space-y-3 text-xs">
+          <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-2">Editable Profile & Account Settings</h3>
+          
+          <div>
+            <label class="font-semibold text-gray-600 mb-1 block">Full Name</label>
+            <input type="text" id="prof-edit-name" value="Jeeva" class="w-full brand-input rounded-xl px-3 py-2 font-medium" />
+          </div>
+          <div>
+            <label class="font-semibold text-gray-600 mb-1 block">Staff Email ID</label>
+            <input type="email" id="prof-edit-email" value="jeeva@sunriseenergysolutions.in" class="w-full brand-input rounded-xl px-3 py-2 font-medium" />
+          </div>
+          <div>
+            <label class="font-semibold text-gray-600 mb-1 block">Mobile Phone</label>
+            <input type="tel" value="+91 98470 12345" class="w-full brand-input rounded-xl px-3 py-2 font-medium" />
+          </div>
+
+          <button onclick="alert('Profile & settings updated successfully!')" class="w-full py-2.5 brand-gradient text-white font-bold rounded-xl text-xs shadow-md brand-glow mt-1">
+            Save Profile Details
+          </button>
+        </div>
+      </div>
+
+      <!-- NOTIFICATION DRAWER -->
+      <div id="notification-drawer" class="hidden absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start justify-end p-3">
+        <div class="bg-white w-full max-w-xs rounded-2xl p-4 space-y-3 shadow-2xl border border-gray-200 mt-10">
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <h3 class="text-xs font-extrabold text-gray-900">App Notifications (3)</h3>
+            <button onclick="toggleNotificationDrawer()" class="w-5 h-5 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs">✕</button>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="p-2 bg-red-50 rounded-xl border border-red-100">
+              <span class="text-[10px] text-brand font-bold block">🚨 New Solar Site Audit Submitted</span>
+              <p class="text-gray-800 font-semibold">Dr. Rajesh Kumar (5 kW)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORGOT PASSWORD MODAL -->
+      <div id="forgot-password-modal" class="hidden absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-xs rounded-2xl p-4 space-y-3 shadow-2xl border border-gray-200">
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <h3 class="text-xs font-extrabold text-gray-900">Reset Staff Password</h3>
+            <button onclick="closeForgotPasswordModal()" class="w-5 h-5 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs">✕</button>
+          </div>
+          <div>
+            <label class="text-[11px] font-semibold text-gray-700 mb-1 block">Staff Mobile Number</label>
+            <input type="tel" placeholder="+91 98470 12345" class="w-full brand-input rounded-xl px-3 py-2 text-xs font-medium" />
+          </div>
+          <button onclick="alert('Reset OTP sent to staff mobile number!'); closeForgotPasswordModal();" class="w-full py-2.5 brand-gradient text-white font-bold rounded-xl text-xs shadow-md">Reset Password</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3-TAB PERSISTENT BOTTOM NAVIGATION BAR -->
+    <div id="app-bottom-nav" class="hidden bg-white px-3 py-2 border-t border-gray-200 justify-around items-center text-gray-400 text-xs shadow-lg">
+      <button onclick="switchTab('home')" id="nav-btn-home" class="flex flex-col items-center hover:text-gray-900 font-medium">
+        <i class="fa-solid fa-house text-base"></i>
+        <span class="text-[9px] mt-0.5">Home</span>
+      </button>
+      <button onclick="switchTab('leads')" id="nav-btn-leads" class="flex flex-col items-center text-brand font-black">
+        <i class="fa-solid fa-folder-open text-base"></i>
+        <span class="text-[9px] mt-0.5">Site Audit</span>
+      </button>
+      <button onclick="switchTab('profile')" id="nav-btn-profile" class="flex flex-col items-center hover:text-gray-900 font-medium">
+        <i class="fa-solid fa-user-gear text-base"></i>
+        <span class="text-[9px] mt-0.5">Profile & Settings</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    let activeUser = {
+      name: "Jeeva",
+      role: "Sales Rep",
+      email: "jeeva@sunriseenergysolutions.in",
+      avatar: "JV"
+    };
+
+    function showLoginScreen() {
+      document.querySelectorAll('.view-pane').forEach(el => el.classList.add('hidden'));
+      document.getElementById('pane-login').classList.remove('hidden');
+      document.getElementById('app-header').classList.add('hidden');
+      document.getElementById('app-bottom-nav').classList.add('hidden');
+    }
+
+    function quickLaunchJeeva() {
+      document.getElementById('login-email').value = "jeeva@sunriseenergysolutions.in";
+      performLogin();
+    }
+
+    function quickLaunchOwner() {
+      document.getElementById('login-email').value = "subeesh@sunriseenergysolutions.in";
+      performLogin();
+    }
+
+    function autoFillDemoAccount() {
+      const val = document.getElementById('demo-account-select').value;
+      if (val === 'jeeva') {
+        document.getElementById('login-email').value = "jeeva@sunriseenergysolutions.in";
+      } else if (val === 'owner') {
+        document.getElementById('login-email').value = "subeesh@sunriseenergysolutions.in";
+      } else if (val === 'deepthi') {
+        document.getElementById('login-email').value = "deepthi@sunriseenergysolutions.in";
+      } else {
+        document.getElementById('login-email').value = "rahul.service@sunriseenergysolutions.in";
+      }
+    }
+
+    function performLogin() {
+      const email = document.getElementById('login-email').value.toLowerCase();
+      
+      if (email.includes('subeesh') || email.includes('owner')) {
+        activeUser = { name: "Subeesh", role: "Company Owner", email: email, avatar: "SB" };
+      } else if (email.includes('deepthi')) {
+        activeUser = { name: "Deepthi", role: "Office Assistant", email: email, avatar: "DP" };
+      } else if (email.includes('rahul')) {
+        activeUser = { name: "Rahul", role: "Maintenance Tech", email: email, avatar: "RK" };
+      } else {
+        activeUser = { name: "Jeeva", role: "Sales Rep", email: email, avatar: "JV" };
+      }
+
+      document.getElementById('hdr-staff-name').innerText = activeUser.name;
+      document.getElementById('hdr-staff-badge').innerText = activeUser.role;
+      document.getElementById('prof-disp-name').innerText = activeUser.name;
+      document.getElementById('prof-disp-role').innerText = activeUser.role;
+      document.getElementById('prof-edit-name').value = activeUser.name;
+      document.getElementById('prof-edit-email').value = activeUser.email;
+      document.getElementById('prof-avatar-badge').innerText = activeUser.avatar;
+      document.getElementById('home-welcome-title').innerText = "Welcome Back, " + activeUser.name;
+      document.getElementById('home-welcome-sub').innerText = activeUser.role + " • Kozhikode";
+
+      document.getElementById('pane-login').classList.add('hidden');
+      document.getElementById('app-header').classList.remove('hidden');
+      document.getElementById('app-bottom-nav').classList.remove('hidden');
+      document.getElementById('app-bottom-nav').classList.add('flex');
+
+      // POPULATE ROLE-SPECIFIC HOME DASHBOARD WIDGETS
+      updateHomeDashboard();
+
+      // ALWAYS REDIRECT TO STAFF MEMBER'S HOME DASHBOARD UPON LOGIN!
+      switchTab('home');
+    }
+
+    function updateHomeDashboard() {
+      const container = document.getElementById('home-role-widgets');
+      const newSurveyBtn = document.getElementById('home-new-survey-btn');
+
+      if (activeUser.role === "Sales Rep") {
+        newSurveyBtn.classList.remove('hidden');
+        container.innerHTML = `
+          <!-- Sales Rep Metrics -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+              <span class="text-[10px] text-gray-500 font-semibold">Site Audits Completed</span>
+              <p class="text-xl font-black text-gray-900 mt-0.5">14</p>
+            </div>
+            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+              <span class="text-[10px] text-gray-500 font-semibold">Deals Closed</span>
+              <p class="text-xl font-black text-emerald-600 mt-0.5">6</p>
+            </div>
+          </div>
+
+          <!-- Sales Rep Action Banner -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <h3 class="text-xs font-bold text-gray-900">Active Customer Enquiry</h3>
+              <button onclick="switchTab('leads')" class="text-[11px] text-brand font-bold">Open Site Audit →</button>
+            </div>
+            
+            <div onclick="switchTab('leads')" class="brand-card rounded-xl p-3 border-2 border-brand bg-red-50/30 cursor-pointer flex justify-between items-center shadow-sm">
+              <div>
+                <h4 class="text-xs font-bold text-gray-900">Dr. Rajesh Kumar</h4>
+                <p class="text-[10px] text-gray-500">Mavoor Road, Kozhikode • 5 kW On-Grid</p>
+              </div>
+              <span class="text-[10px] bg-brand text-white font-extrabold px-2.5 py-1 rounded-lg shadow-sm">Continue Audit</span>
+            </div>
+          </div>
+
+          <!-- Recent Leads Queue -->
+          <div class="bg-white p-3 rounded-2xl border border-gray-200 space-y-2">
+            <h3 class="text-xs font-extrabold text-gray-900 border-b border-gray-100 pb-1.5">Recent Kozhikode Site Leads</h3>
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between items-center p-2 bg-slate-50 rounded-xl">
+                <div>
+                  <h4 class="font-bold text-gray-900 text-[11px]">Chevayur Commercial Complex</h4>
+                  <p class="text-[9px] text-gray-500">10 kW Proposal • Quote Emailed</p>
+                </div>
+                <span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">PDF Sent</span>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-slate-50 rounded-xl">
+                <div>
+                  <h4 class="font-bold text-gray-900 text-[11px]">Hilite City Residence Villa</h4>
+                  <p class="text-[9px] text-gray-500">3 kW Rooftop Audit Scheduled</p>
+                </div>
+                <span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">Pending Site Visit</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (activeUser.role === "Company Owner") {
+        newSurveyBtn.classList.add('hidden');
+        container.innerHTML = `
+          <!-- Owner Executive Metrics -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+              <span class="text-[10px] text-gray-500 font-semibold">Total Revenue (Sept)</span>
+              <p class="text-xl font-black text-gray-900 mt-0.5">₹ 42.5 L</p>
+            </div>
+            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+              <span class="text-[10px] text-gray-500 font-semibold">Balance Due From Leads</span>
+              <p class="text-xl font-black text-amber-600 mt-0.5">₹ 8.2 L</p>
+            </div>
+          </div>
+
+          <!-- Owner Exclusive Inventory Card -->
+          <div onclick="switchTab('inventory')" class="brand-card rounded-xl p-3 border-2 border-amber-500 bg-amber-50/40 cursor-pointer flex justify-between items-center shadow-sm">
+            <div>
+              <span class="text-[9px] bg-amber-500 text-white font-extrabold px-1.5 py-0.5 rounded uppercase">Owner Inventory Desk</span>
+              <h4 class="text-xs font-bold text-gray-900 mt-1">SS304 Roofing Screws Alert</h4>
+              <p class="text-[10px] text-amber-800 font-semibold">Low Stock: 450 Pcs remaining in warehouse</p>
+            </div>
+            <span class="text-[10px] bg-amber-600 text-white font-extrabold px-2.5 py-1 rounded-lg">View Inventory →</span>
+          </div>
+
+          <!-- Active Solar Project Timelines -->
+          <div class="bg-white p-3 rounded-2xl border border-gray-200 space-y-2">
+            <h3 class="text-xs font-extrabold text-gray-900 border-b border-gray-100 pb-1.5">Kozhikode Live Project Stages</h3>
+            <div class="space-y-2 text-xs">
+              <div class="p-2 bg-slate-50 rounded-xl space-y-1">
+                <div class="flex justify-between items-center">
+                  <span class="font-extrabold text-gray-900 text-[11px]">Mavoor Villa (Rajesh Kumar)</span>
+                  <span class="text-[9px] bg-brand text-white px-2 py-0.2 rounded font-bold">Stage 3 of 5</span>
+                </div>
+                <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-brand h-full w-3/5"></div>
+                </div>
+                <p class="text-[9px] text-gray-500">Structural Mounting & Panel Placement</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (activeUser.role === "Office Assistant") {
+        newSurveyBtn.classList.add('hidden');
+        container.innerHTML = `
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+              <span class="text-[10px] text-gray-500 font-semibold">Net Metering Apps</span>
+              <p class="text-xl font-black text-brand mt-0.5">8 Pending</p>
+            </div>
+            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+              <span class="text-[10px] text-gray-500 font-semibold">KSEB Approvals</span>
+              <p class="text-xl font-black text-emerald-600 mt-0.5">12 Ready</p>
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-2xl border border-gray-200 space-y-2 text-xs">
+            <h3 class="text-xs font-extrabold text-gray-900 border-b border-gray-100 pb-1.5">Office Assistant Desk</h3>
+            <p class="text-[10px] text-gray-600">Generated KSEB Feasibility Documents & Tariff Category Forms.</p>
+            <button onclick="alert('Net Metering PDF Generated')" class="w-full py-2 bg-brand text-white font-bold rounded-xl text-xs shadow-md">Generate KSEB Net Meter Application</button>
+          </div>
+        `;
+      } else {
+        newSurveyBtn.classList.add('hidden');
+        container.innerHTML = `
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+              <span class="text-[10px] text-gray-500 font-semibold">Servicing Jobs Today</span>
+              <p class="text-xl font-black text-brand mt-0.5">3 Sites</p>
+            </div>
+            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm">
+              <span class="text-[10px] text-gray-500 font-semibold">Jobs Completed</span>
+              <p class="text-xl font-black text-emerald-600 mt-0.5">1 Done</p>
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-2xl border border-gray-200 space-y-2 text-xs">
+            <h3 class="text-xs font-extrabold text-gray-900 border-b border-gray-100 pb-1.5">Rahul's Service Schedule</h3>
+            <div class="p-2 bg-slate-50 rounded-xl space-y-1">
+              <h4 class="font-bold text-gray-900 text-[11px]">Calicut Medical College Villa</h4>
+              <p class="text-[10px] text-gray-500">Panel Washing & Inverter Diagnostic</p>
+              <button onclick="alert('GPS Route Started')" class="mt-1 px-3 py-1 bg-emerald-600 text-white font-bold rounded-lg text-[10px]">Start GPS Route →</button>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('#app-tab-home, #app-tab-leads, #app-tab-inventory, #app-tab-profile').forEach(el => el.classList.add('hidden'));
+      document.getElementById('app-tab-' + tabName).classList.remove('hidden');
+
+      document.querySelectorAll('#app-bottom-nav button').forEach(b => b.className = "flex flex-col items-center text-gray-400 font-medium");
+      const targetNavBtn = document.getElementById('nav-btn-' + tabName);
+      if (targetNavBtn) {
+        targetNavBtn.className = "flex flex-col items-center text-brand font-black";
+      }
+
+      if (tabName === 'leads') {
+        goToStep(1);
+      }
+    }
+
+    function goToStep(stepNumber) {
+      document.querySelectorAll('.step-pane').forEach(el => el.classList.add('hidden'));
+      document.getElementById('step-' + stepNumber).classList.remove('hidden');
+    }
+
+    function submitEnquiry() {
+      document.querySelectorAll('.step-pane').forEach(el => el.classList.add('hidden'));
+      document.getElementById('step-success').classList.remove('hidden');
+    }
+
+    function toggleNotificationDrawer() {
+      document.getElementById('notification-drawer').classList.toggle('hidden');
+    }
+
+    function openForgotPasswordModal() {
+      document.getElementById('forgot-password-modal').classList.remove('hidden');
+    }
+    function closeForgotPasswordModal() {
+      document.getElementById('forgot-password-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
