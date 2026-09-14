@@ -413,12 +413,56 @@
             </div>
 
             <div>
-              <label class="font-bold text-gray-800 mb-1 block">System Battery Connection Type *</label>
+              <label class="font-bold text-gray-900 mb-1 block">System Connection & Grid Type *</label>
               <select class="w-full brand-input rounded-xl px-3 py-2 text-xs font-bold text-gray-900 focus:border-brand">
                 <option selected>On-Grid System (Grid-Tied for KSEB Net Metering)</option>
                 <option>Hybrid System (Grid-Tied + Battery Backup Storage)</option>
                 <option>Off-Grid System (Standalone Battery Backup without Grid)</option>
               </select>
+            </div>
+
+            <!-- Technology Partners & Brands Portfolio Selection -->
+            <div class="space-y-2 pt-1 border-t border-gray-200">
+              <label class="font-black text-gray-900 text-xs flex items-center justify-between">
+                <span>🤝 Authorized Partner Brands Portfolio</span>
+                <span class="text-[9px] bg-red-100 text-brand px-2 py-0.5 rounded font-bold">15+ Partners</span>
+              </label>
+
+              <div>
+                <label class="text-[10px] font-bold text-gray-700 mb-0.5 block">Select Solar Panel Brand *</label>
+                <select class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-semibold text-gray-900">
+                  <option selected>Waaree Energies (Mono PERC / Bifacial)</option>
+                  <option>Vikram Solar (High Efficiency Module)</option>
+                  <option>Tata Power Solar (Tier-1 Indian Panel)</option>
+                  <option>RenewSys Solar</option>
+                  <option>Anchor Solar / Panasonic</option>
+                  <option>EMMVEE Solar</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-[10px] font-bold text-gray-700 mb-0.5 block">Select Inverter & Electronics Partner *</label>
+                <select class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-semibold text-gray-900">
+                  <option selected>Growatt (Dual MPPT On-Grid / Hybrid)</option>
+                  <option>Havells Solar Inverter</option>
+                  <option>ABB Solar String Inverter</option>
+                  <option>Delta Electronics Inverter</option>
+                  <option>Kirloskar Solar Inverter</option>
+                  <option>Power-One Solar Inverter</option>
+                  <option>Hykon Solar Power Tech</option>
+                  <option>Microtek / Livguard Inverter</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-[10px] font-bold text-gray-700 mb-0.5 block">Select Electrical Accessories & Battery *</label>
+                <select class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-semibold text-gray-900">
+                  <option selected>V-Guard & Polycab Solar Cabling</option>
+                  <option>Panasonic & Anchor Switchgear</option>
+                  <option>Microtek Solar Tubular Battery</option>
+                  <option>Livguard Solar Battery Storage</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -532,6 +576,182 @@
             <input type="tel" placeholder="+91 98470 12345" class="w-full brand-input rounded-xl px-3 py-2 text-xs font-medium" />
           </div>
           <button onclick="alert('Reset OTP sent to staff mobile number!'); closeForgotPasswordModal();" class="w-full py-2.5 brand-gradient text-white font-bold rounded-xl text-xs shadow-md">Reset Password</button>
+        </div>
+      </div>
+
+      <!-- ASSIGN STAFF & START SITE WORK MODAL (For Owner Subeesh) -->
+      <div id="assign-staff-modal" class="hidden absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 overflow-y-auto">
+        <div class="bg-white w-full max-w-xs rounded-2xl p-4 space-y-3 shadow-2xl border border-gray-200">
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <div>
+              <h3 class="text-xs font-extrabold text-gray-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-md bg-red-100 text-brand flex items-center justify-center text-[10px]">👷</span>
+                Assign Staff & Start Site Work
+              </h3>
+              <p class="text-[9px] text-gray-500">Dispatch technical team & launch installation</p>
+            </div>
+            <button onclick="closeAssignStaffModal()" class="w-5 h-5 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs hover:bg-gray-200">✕</button>
+          </div>
+
+          <form onsubmit="submitStaffAssignment(event)" class="space-y-2.5 text-xs">
+            <!-- Site Selection -->
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Select Solar Project Site</label>
+              <select id="modal-site-select" class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-semibold text-gray-800">
+                <option value="Mavoor Villa (Dr. Rajesh Kumar)">Mavoor Villa (5 kW Rooftop)</option>
+                <option value="Chevayur Commercial Showroom">Chevayur Showroom (10 kW Grid-Tied)</option>
+                <option value="Hilite City Residence Villa">Hilite City Residence Villa (3 kW Rooftop)</option>
+                <option value="Kozhikode Medical College Site">Kozhikode Medical College Site (15 kW Commercial)</option>
+              </select>
+            </div>
+
+            <!-- Panel Installation Crew -->
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 flex items-center justify-between mb-0.5">
+                <span>🔧 Panel Installation Staff / Crew</span>
+                <span class="text-[8px] bg-red-50 text-brand px-1.5 rounded font-bold">Mounting Crew</span>
+              </label>
+              <select id="modal-panel-crew" class="w-full brand-input rounded-xl px-2 py-1.5 text-[11px] font-medium text-gray-800">
+                <option value="Rajesh P. (Lead) + 3 Installers">Rajesh P. (Lead Installer) + 3 Crew Members</option>
+                <option value="Santhosh Team (Framing Crew)">Santhosh Team (Rooftop Framing Crew)</option>
+                <option value="Unassigned">-- Skip / Assign Later --</option>
+              </select>
+            </div>
+
+            <!-- Electrical Work Staff -->
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 flex items-center justify-between mb-0.5">
+                <span>⚡ Electrical Work Staff</span>
+                <span class="text-[8px] bg-amber-50 text-amber-700 px-1.5 rounded font-bold">Inverter & Cabling</span>
+              </label>
+              <select id="modal-electrical-staff" class="w-full brand-input rounded-xl px-2 py-1.5 text-[11px] font-medium text-gray-800">
+                <option value="Vipin K. (Senior Solar Electrician)">Vipin K. (Senior Solar Electrician - KSEB Certified)</option>
+                <option value="Arun Solar Tech (DC & AC Wiring)">Arun Solar Tech (DC & AC Wiring Specialist)</option>
+                <option value="Unassigned">-- Skip / Assign Later --</option>
+              </select>
+            </div>
+
+            <!-- Maintenance & Service Tech -->
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 flex items-center justify-between mb-0.5">
+                <span>🛠️ Maintenance & Quality Staff</span>
+                <span class="text-[8px] bg-emerald-50 text-emerald-700 px-1.5 rounded font-bold">Quality & AMC</span>
+              </label>
+              <select id="modal-maintenance-staff" class="w-full brand-input rounded-xl px-2 py-1.5 text-[11px] font-medium text-gray-800">
+                <option value="Rahul (Service Tech - Sunrise Lead)">Rahul (Service Tech - Sunrise Lead)</option>
+                <option value="Anil Quality Specialist">Anil (Quality & AMC Inspection Specialist)</option>
+                <option value="Unassigned">-- Skip / Assign Later --</option>
+              </select>
+            </div>
+
+            <!-- Work Action & Target Date -->
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Start Stage / Action</label>
+                <select id="modal-work-stage" class="w-full brand-input rounded-xl px-1.5 py-1.5 text-[10px] font-medium text-gray-800">
+                  <option value="Stage 1: Mounting Structure">Start Mounting</option>
+                  <option value="Stage 2: Panel Installation">Start Panel Laying</option>
+                  <option value="Stage 3: Wiring & Inverter">Start Electrical</option>
+                  <option value="Stage 4: KSEB Net Metering">KSEB Prep</option>
+                  <option value="Stage 5: Commissioning">Commissioning</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Target Start Date</label>
+                <input type="date" value="2026-09-15" class="w-full brand-input rounded-xl px-1.5 py-1.5 text-[10px] font-medium" />
+              </div>
+            </div>
+
+            <div class="pt-1">
+              <button type="submit" class="w-full py-2.5 brand-gradient text-white font-extrabold rounded-xl text-xs shadow-md flex items-center justify-center gap-1">
+                <span>⚡ Assign Staff & Launch Site Work</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- EDIT CONFIGURATION FIELD MODAL -->
+      <div id="edit-config-modal" class="hidden absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3">
+        <div class="bg-white w-full max-w-xs rounded-2xl p-4 space-y-3 shadow-2xl border border-gray-200">
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <div>
+              <h3 class="text-xs font-extrabold text-gray-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-md bg-amber-100 text-amber-800 flex items-center justify-center text-[10px]">✏️</span>
+                Edit Configuration Field
+              </h3>
+              <p class="text-[9px] text-gray-500">Update master setting or rate slab</p>
+            </div>
+            <button onclick="closeEditConfigModal()" class="w-5 h-5 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs hover:bg-gray-200">✕</button>
+          </div>
+
+          <form onsubmit="submitConfigEdit(event)" class="space-y-2.5 text-xs">
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Master Category</label>
+              <input type="text" id="edit-config-cat" readonly class="w-full brand-input bg-gray-100 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-gray-600" />
+            </div>
+
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Field / Item Name</label>
+              <input type="text" id="edit-config-label" required class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-semibold text-gray-900" />
+            </div>
+
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Configured Rate / Value</label>
+              <input type="text" id="edit-config-val" required class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-bold text-brand" />
+            </div>
+
+            <div class="pt-1 flex gap-2">
+              <button type="button" onclick="closeEditConfigModal()" class="w-1/3 py-2 bg-gray-100 text-gray-700 font-bold rounded-xl text-xs">Cancel</button>
+              <button type="submit" class="w-2/3 py-2 brand-gradient text-white font-extrabold rounded-xl text-xs shadow-md">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ADD NEW CONFIGURATION FIELD MODAL -->
+      <div id="add-config-modal" class="hidden absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3">
+        <div class="bg-white w-full max-w-xs rounded-2xl p-4 space-y-3 shadow-2xl border border-gray-200">
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <div>
+              <h3 class="text-xs font-extrabold text-gray-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-md bg-brand text-white flex items-center justify-center text-[10px]">+</span>
+                Add New Master Config Field
+              </h3>
+              <p class="text-[9px] text-gray-500">Create new dropdown option or hardware rate</p>
+            </div>
+            <button onclick="closeAddConfigModal()" class="w-5 h-5 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs hover:bg-gray-200">✕</button>
+          </div>
+
+          <form onsubmit="submitNewConfig(event)" class="space-y-2.5 text-xs">
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Configuration Category</label>
+              <select id="add-config-cat" class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-semibold text-gray-800">
+                <option value="Solar Panels & Hardware Catalog">Solar Panels & Hardware Catalog</option>
+                <option value="Solar Inverters & Batteries">Solar Inverters & Batteries</option>
+                <option value="Structures & Electrical Wiring">Structures & Electrical Wiring</option>
+                <option value="Govt Subsidies & KSEB Slabs">Govt Subsidies & KSEB Slabs</option>
+                <option value="Site Audit Dropdown Options">Site Audit Dropdown Options</option>
+                <option value="Maintenance & AMC Service Rates">Maintenance & AMC Service Job Rates</option>
+                <option value="Enterprise Company Details">Enterprise Company Details</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Field / Option Label</label>
+              <input type="text" id="add-config-label" placeholder="e.g. Adani 550W Bifacial Panel" required class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-medium text-gray-900" />
+            </div>
+
+            <div>
+              <label class="text-[10px] font-bold text-gray-700 block mb-0.5">Rate / Value / Status</label>
+              <input type="text" id="add-config-val" placeholder="e.g. ₹54 / Watt" required class="w-full brand-input rounded-xl px-2.5 py-1.5 text-xs font-medium" />
+            </div>
+
+            <div class="pt-1 flex gap-2">
+              <button type="button" onclick="closeAddConfigModal()" class="w-1/3 py-2 bg-gray-100 text-gray-700 font-bold rounded-xl text-xs">Cancel</button>
+              <button type="submit" class="w-2/3 py-2 brand-gradient text-white font-extrabold rounded-xl text-xs shadow-md">+ Add Master Field</button>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -687,8 +907,8 @@
       } else if (activeUser.role === "Company Owner") {
         newSurveyBtn.classList.add('hidden');
         container.innerHTML = `
-          <!-- Horizontal Scroll Category Pills Bar -->
-          <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar scroll-smooth pb-1 text-[10px] font-bold">
+          <!-- Horizontal Scroll Category Pills Bar (Swipable) -->
+          <div id="owner-pills-bar" class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar scroll-smooth pb-1 text-[10px] font-bold cursor-grab active:cursor-grabbing select-none touch-pan-x">
             <button onclick="filterOwnerSection('all')" id="owner-pill-all" class="owner-pill px-2.5 py-1.5 rounded-xl bg-brand text-white shrink-0 shadow-sm">
               📊 All Overview
             </button>
@@ -704,6 +924,9 @@
             <button onclick="filterOwnerSection('payments')" id="owner-pill-payments" class="owner-pill px-2.5 py-1.5 rounded-xl bg-white text-gray-700 border border-gray-200 shrink-0">
               💳 Cash Flow (₹8.2L)
             </button>
+            <button onclick="filterOwnerSection('config')" id="owner-pill-config" class="owner-pill px-2.5 py-1.5 rounded-xl bg-white text-gray-700 border border-gray-200 shrink-0 flex items-center gap-1">
+              ⚙️ Settings & Config
+            </button>
           </div>
 
           <!-- Section 1: Cash Flow & Financial Metrics -->
@@ -718,78 +941,165 @@
             </div>
           </div>
 
-          <!-- Section 2: Ongoing Works Timeline Card -->
+          <!-- Section 2: Ongoing Works Timeline & Staff Assignment Card -->
           <div id="owner-sec-works" class="owner-section bg-white p-3 rounded-2xl border border-gray-200 space-y-2.5 shadow-sm">
             <div class="flex justify-between items-center border-b border-gray-100 pb-1.5">
-              <h3 class="text-xs font-extrabold text-gray-900 flex items-center gap-1">
-                <span>🏗️</span> Ongoing Solar Projects (Kozhikode)
-              </h3>
-              <span class="text-[9px] bg-red-100 text-brand font-extrabold px-2 py-0.5 rounded">5 Live Sites</span>
+              <div>
+                <h3 class="text-xs font-extrabold text-gray-900 flex items-center gap-1">
+                  <span>🏗️</span> Ongoing Solar Projects (Kozhikode)
+                </h3>
+                <p class="text-[9px] text-gray-500">Dispatch crew & start work on solar sites</p>
+              </div>
+              <button onclick="openAssignStaffModal('')" class="text-[10px] bg-brand text-white px-2.5 py-1 rounded-xl font-extrabold shadow-sm flex items-center gap-1 hover:bg-brand/90 transition-all">
+                ⚡ + Assign Crew & Start
+              </button>
             </div>
             
             <div class="space-y-2 text-xs">
-              <div class="p-2.5 bg-slate-50 rounded-xl space-y-1">
+              <!-- Site 1 -->
+              <div class="p-2.5 bg-slate-50 rounded-xl space-y-2 border border-gray-100">
                 <div class="flex justify-between items-center">
                   <span class="font-extrabold text-gray-900 text-[11px]">Mavoor Villa (Dr. Rajesh Kumar)</span>
-                  <span class="text-[9px] bg-brand text-white px-2 py-0.2 rounded font-bold">Stage 3 of 5</span>
+                  <span class="text-[9px] bg-brand text-white px-2 py-0.5 rounded font-bold">Stage 3 of 5</span>
                 </div>
                 <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
                   <div class="bg-brand h-full w-3/5"></div>
                 </div>
-                <div class="flex justify-between text-[9px] text-gray-500 font-medium pt-0.5">
+                <div class="flex justify-between text-[9px] text-gray-500 font-medium">
                   <span>5 kW On-Grid • Rooftop Mounts Done</span>
                   <span class="text-emerald-600 font-bold">On Schedule</span>
                 </div>
+                <!-- Assigned Staff & Quick Action -->
+                <div class="pt-1 flex items-center justify-between border-t border-gray-200/60 text-[9px] gap-1 flex-wrap">
+                  <div class="flex items-center gap-1 flex-wrap">
+                    <span class="bg-red-50 text-brand px-1.5 py-0.5 rounded font-semibold border border-red-100">🔧 Panel: Rajesh Crew</span>
+                    <span class="bg-amber-50 text-amber-800 px-1.5 py-0.5 rounded font-semibold border border-amber-100">⚡ Elec: Vipin K.</span>
+                  </div>
+                  <button onclick="openAssignStaffModal('Mavoor Villa')" class="text-[9px] bg-white border border-gray-300 text-gray-800 px-2 py-0.5 rounded-lg font-bold hover:border-brand hover:text-brand transition-colors">
+                    Reassign Staff
+                  </button>
+                </div>
               </div>
 
-              <div class="p-2.5 bg-slate-50 rounded-xl space-y-1">
+              <!-- Site 2 -->
+              <div class="p-2.5 bg-slate-50 rounded-xl space-y-2 border border-gray-100">
                 <div class="flex justify-between items-center">
                   <span class="font-extrabold text-gray-900 text-[11px]">Chevayur Commercial Showroom</span>
-                  <span class="text-[9px] bg-amber-500 text-white px-2 py-0.2 rounded font-bold">Stage 2 of 5</span>
+                  <span class="text-[9px] bg-amber-500 text-white px-2 py-0.5 rounded font-bold">Stage 2 of 5</span>
                 </div>
                 <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
                   <div class="bg-amber-500 h-full w-2/5"></div>
                 </div>
-                <div class="flex justify-between text-[9px] text-gray-500 font-medium pt-0.5">
-                  <span>10 kW Proposal • KSEB Net Meter Application</span>
+                <div class="flex justify-between text-[9px] text-gray-500 font-medium">
+                  <span>10 kW Proposal • KSEB Application</span>
                   <span class="text-amber-600 font-bold">Pending Approval</span>
+                </div>
+                <!-- Assigned Staff & Quick Action -->
+                <div class="pt-1 flex items-center justify-between border-t border-gray-200/60 text-[9px] gap-1 flex-wrap">
+                  <div class="flex items-center gap-1 flex-wrap">
+                    <span class="bg-blue-50 text-blue-800 px-1.5 py-0.5 rounded font-semibold border border-blue-100">📑 Desk: Deepthi</span>
+                    <span class="bg-amber-50 text-amber-800 px-1.5 py-0.5 rounded font-semibold border border-amber-100">⚡ Elec: Vipin K.</span>
+                  </div>
+                  <button onclick="openAssignStaffModal('Chevayur Commercial Showroom')" class="text-[9px] bg-brand text-white px-2 py-0.5 rounded-lg font-bold shadow-xs hover:bg-brand/90 transition-colors">
+                    + Assign Panel Crew
+                  </button>
+                </div>
+              </div>
+
+              <!-- Site 3 -->
+              <div class="p-2.5 bg-slate-50 rounded-xl space-y-2 border border-gray-100">
+                <div class="flex justify-between items-center">
+                  <span class="font-extrabold text-gray-900 text-[11px]">Hilite City Residence Villa</span>
+                  <span class="text-[9px] bg-slate-600 text-white px-2 py-0.5 rounded font-bold">Audit Completed</span>
+                </div>
+                <div class="flex justify-between text-[9px] text-gray-500 font-medium">
+                  <span>3 kW Rooftop • Audit Done by Jeeva</span>
+                  <span class="text-brand font-bold">Ready for Crew</span>
+                </div>
+                <!-- Quick Action -->
+                <div class="pt-1 flex items-center justify-between border-t border-gray-200/60 text-[9px]">
+                  <span class="text-gray-400 italic">No installation crew assigned</span>
+                  <button onclick="openAssignStaffModal('Hilite City Residence Villa')" class="text-[9px] brand-gradient text-white px-2 py-0.5 rounded-lg font-extrabold shadow-xs">
+                    ⚡ Assign Crew & Start Work
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Section 3: Employees & Staff Desk -->
+          <!-- Section 3: Employees & Specialized Trade Staff Roster -->
           <div id="owner-sec-staff" class="owner-section bg-white p-3 rounded-2xl border border-gray-200 space-y-2.5 shadow-sm">
             <div class="flex justify-between items-center border-b border-gray-100 pb-1.5">
-              <h3 class="text-xs font-extrabold text-gray-900 flex items-center gap-1">
-                <span>👥</span> Employees & Staff Roster
-              </h3>
-              <button onclick="alert('Staff account creation desk')" class="text-[10px] bg-brand text-white px-2 py-1 rounded-lg font-bold shadow-sm">
-                + Add Staff
+              <div>
+                <h3 class="text-xs font-extrabold text-gray-900 flex items-center gap-1">
+                  <span>👥</span> Trade Crews & Staff Roster
+                </h3>
+                <p class="text-[9px] text-gray-500">Panel, Electrical, Maintenance & Sales Staff</p>
+              </div>
+              <button onclick="openAssignStaffModal('')" class="text-[10px] bg-slate-900 text-white px-2 py-1 rounded-lg font-bold shadow-sm flex items-center gap-1">
+                ⚡ Dispatch Staff
               </button>
             </div>
 
             <div class="grid grid-cols-2 gap-2 text-xs">
+              <!-- Panel Crew Lead -->
+              <div class="p-2 bg-slate-50 rounded-xl border border-gray-100 space-y-1">
+                <div class="flex items-center space-x-1.5">
+                  <span class="w-6 h-6 rounded-full bg-red-500 text-white font-bold text-[10px] flex items-center justify-center">RP</span>
+                  <div>
+                    <h4 class="font-bold text-gray-900 text-[11px]">Rajesh P.</h4>
+                    <p class="text-[9px] text-brand font-bold">Panel Install Lead</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center text-[8px] pt-0.5">
+                  <span class="bg-red-100 text-red-800 px-1.5 py-0.2 rounded font-bold">3 Crew Members</span>
+                  <button onclick="openAssignStaffModal('Mavoor Villa')" class="text-brand font-bold underline">Assign Site</button>
+                </div>
+              </div>
+
+              <!-- Electrical Staff Lead -->
+              <div class="p-2 bg-slate-50 rounded-xl border border-gray-100 space-y-1">
+                <div class="flex items-center space-x-1.5">
+                  <span class="w-6 h-6 rounded-full bg-amber-500 text-white font-bold text-[10px] flex items-center justify-center">VK</span>
+                  <div>
+                    <h4 class="font-bold text-gray-900 text-[11px]">Vipin K.</h4>
+                    <p class="text-[9px] text-amber-700 font-bold">Senior Electrician</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center text-[8px] pt-0.5">
+                  <span class="bg-amber-100 text-amber-800 px-1.5 py-0.2 rounded font-bold">Inverter & Cabling</span>
+                  <button onclick="openAssignStaffModal('Chevayur Commercial Showroom')" class="text-amber-800 font-bold underline">Assign Site</button>
+                </div>
+              </div>
+
+              <!-- Maintenance Staff -->
+              <div class="p-2 bg-slate-50 rounded-xl border border-gray-100 space-y-1">
+                <div class="flex items-center space-x-1.5">
+                  <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-[10px] flex items-center justify-center">RH</span>
+                  <div>
+                    <h4 class="font-bold text-gray-900 text-[11px]">Rahul</h4>
+                    <p class="text-[9px] text-emerald-700 font-bold">Maintenance Tech</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center text-[8px] pt-0.5">
+                  <span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded font-bold">AMC & Service</span>
+                  <button onclick="openAssignStaffModal('Mavoor Villa')" class="text-emerald-800 font-bold underline">Assign Site</button>
+                </div>
+              </div>
+
+              <!-- Sales Rep -->
               <div class="p-2 bg-slate-50 rounded-xl border border-gray-100 space-y-1">
                 <div class="flex items-center space-x-1.5">
                   <span class="w-6 h-6 rounded-full bg-brand text-white font-bold text-[10px] flex items-center justify-center">JV</span>
                   <div>
                     <h4 class="font-bold text-gray-900 text-[11px]">Jeeva</h4>
-                    <p class="text-[9px] text-brand font-semibold">Sales Rep</p>
+                    <p class="text-[9px] text-brand font-bold">Sales & Site Audit</p>
                   </div>
                 </div>
-                <span class="text-[8px] bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded font-bold block text-center">2 Audits Today</span>
-              </div>
-
-              <div class="p-2 bg-slate-50 rounded-xl border border-gray-100 space-y-1">
-                <div class="flex items-center space-x-1.5">
-                  <span class="w-6 h-6 rounded-full bg-slate-700 text-white font-bold text-[10px] flex items-center justify-center">DP</span>
-                  <div>
-                    <h4 class="font-bold text-gray-900 text-[11px]">Deepthi</h4>
-                    <p class="text-[9px] text-slate-600 font-semibold">Office Assist</p>
-                  </div>
+                <div class="flex justify-between items-center text-[8px] pt-0.5">
+                  <span class="bg-purple-100 text-purple-800 px-1.5 py-0.2 rounded font-bold">2 Audits Today</span>
+                  <span class="text-gray-400 font-medium">On Field</span>
                 </div>
-                <span class="text-[8px] bg-blue-100 text-blue-800 px-1.5 py-0.2 rounded font-bold block text-center">3 KSEB Forms</span>
               </div>
             </div>
           </div>
@@ -841,8 +1151,133 @@
                 <i class="fa-brands fa-whatsapp"></i> Remind
               </button>
             </div>
+          <!-- Section 6: Master Config & App Field Settings Desk -->
+          <div id="owner-sec-config" class="owner-section bg-white p-3 rounded-2xl border border-gray-200 space-y-3 shadow-sm">
+            <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+              <div>
+                <h3 class="text-xs font-extrabold text-gray-900 flex items-center gap-1">
+                  <span>⚙️</span> App Master Data & Configuration Desk
+                </h3>
+                <p class="text-[9px] text-gray-500">Add, Edit & Delete configurable field values & rates</p>
+              </div>
+              <button onclick="openAddConfigModal()" class="text-[10px] bg-brand text-white px-2.5 py-1 rounded-xl font-extrabold shadow-sm flex items-center gap-1 hover:bg-brand/90 transition-all">
+                + Add Master Field
+              </button>
+            </div>
+
+            <!-- Master Data Sub-Category 1: Solar Panel Brands & Rates -->
+            <div class="space-y-1.5 text-xs">
+              <div class="flex justify-between items-center text-[10px] font-bold text-gray-800 border-b border-gray-100 pb-1">
+                <span class="flex items-center gap-1 text-brand"><i class="fa-solid fa-solar-panel"></i> Solar Hardware Catalog & Pricing</span>
+                <span class="text-[8px] bg-red-50 text-brand px-1.5 rounded font-bold">2 Configured</span>
+              </div>
+              
+              <div class="p-2 bg-slate-50 rounded-xl space-y-1.5 border border-gray-100">
+                <div class="flex justify-between items-center text-[11px]" id="config-item-panel-waaree">
+                  <div>
+                    <span class="font-extrabold text-gray-900">Waaree 540W Mono PERC Panel</span>
+                    <p class="text-[9px] text-gray-500">Rate: ₹52 / Watt • Efficiency: 21.3%</p>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <button onclick="openEditConfigModal('Waaree 540W Mono PERC Panel', '₹52 / Watt', 'Hardware Catalog')" class="text-[9px] bg-white border border-gray-300 px-2 py-0.5 rounded font-bold text-gray-700 hover:border-brand hover:text-brand">Edit</button>
+                    <button onclick="deleteConfigItem('Waaree 540W Mono PERC Panel')" class="text-[9px] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded font-bold text-red-600 hover:bg-red-100">Delete</button>
+                  </div>
+                </div>
+
+                <div class="flex justify-between items-center text-[11px]" id="config-item-panel-growatt">
+                  <div>
+                    <span class="font-extrabold text-gray-900">Growatt 5 kW On-Grid Inverter</span>
+                    <p class="text-[9px] text-gray-500">Rate: ₹48,000 / Unit • Warranty: 10 Yrs</p>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <button onclick="openEditConfigModal('Growatt 5 kW On-Grid Inverter', '₹48,000 / Unit', 'Hardware Catalog')" class="text-[9px] bg-white border border-gray-300 px-2 py-0.5 rounded font-bold text-gray-700 hover:border-brand hover:text-brand">Edit</button>
+                    <button onclick="deleteConfigItem('Growatt 5 kW On-Grid Inverter')" class="text-[9px] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded font-bold text-red-600 hover:bg-red-100">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Master Data Sub-Category 2: PM Surya Ghar Subsidies & KSEB Slabs -->
+            <div class="space-y-1.5 text-xs">
+              <div class="flex justify-between items-center text-[10px] font-bold text-gray-800 border-b border-gray-100 pb-1">
+                <span class="flex items-center gap-1 text-emerald-700"><i class="fa-solid fa-hand-holding-dollar"></i> Govt Subsidy & KSEB Slabs</span>
+                <span class="text-[8px] bg-emerald-50 text-emerald-800 px-1.5 rounded font-bold">2 Configured</span>
+              </div>
+              
+              <div class="p-2 bg-slate-50 rounded-xl space-y-1.5 border border-gray-100">
+                <div class="flex justify-between items-center text-[11px]" id="config-item-subsidy-2kw">
+                  <div>
+                    <span class="font-extrabold text-gray-900">PM Surya Ghar Tier 1 (1kW - 2kW)</span>
+                    <p class="text-[9px] text-emerald-700 font-bold">Subsidy: ₹60,000 Direct Govt Transfer</p>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <button onclick="openEditConfigModal('PM Surya Ghar Tier 1 (1kW - 2kW)', '₹60,000', 'Subsidy Slabs')" class="text-[9px] bg-white border border-gray-300 px-2 py-0.5 rounded font-bold text-gray-700 hover:border-brand hover:text-brand">Edit</button>
+                    <button onclick="deleteConfigItem('PM Surya Ghar Tier 1 (1kW - 2kW)')" class="text-[9px] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded font-bold text-red-600 hover:bg-red-100">Delete</button>
+                  </div>
+                </div>
+
+                <div class="flex justify-between items-center text-[11px]" id="config-item-subsidy-3kw">
+                  <div>
+                    <span class="font-extrabold text-gray-900">PM Surya Ghar Tier 2 (3kW Rooftop Max)</span>
+                    <p class="text-[9px] text-emerald-700 font-bold">Subsidy: ₹78,000 Direct Govt Transfer</p>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <button onclick="openEditConfigModal('PM Surya Ghar Tier 2 (3kW Rooftop Max)', '₹78,000', 'Subsidy Slabs')" class="text-[9px] bg-white border border-gray-300 px-2 py-0.5 rounded font-bold text-gray-700 hover:border-brand hover:text-brand">Edit</button>
+                    <button onclick="deleteConfigItem('PM Surya Ghar Tier 2 (3kW Rooftop Max)')" class="text-[9px] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded font-bold text-red-600 hover:bg-red-100">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Master Data Sub-Category 3: Site Audit Checklist & Roof Types Dropdown Fields -->
+            <div class="space-y-1.5 text-xs">
+              <div class="flex justify-between items-center text-[10px] font-bold text-gray-800 border-b border-gray-100 pb-1">
+                <span class="flex items-center gap-1 text-blue-700"><i class="fa-solid fa-list-check"></i> Site Audit Form Dropdown Fields</span>
+                <span class="text-[8px] bg-blue-50 text-blue-800 px-1.5 rounded font-bold">3 Configured</span>
+              </div>
+              
+              <div class="p-2 bg-slate-50 rounded-xl space-y-1.5 border border-gray-100 text-[10px]">
+                <div class="flex justify-between items-center" id="config-item-roof-rcc">
+                  <span><strong>Roof Type:</strong> RCC Flat Concrete Slab</span>
+                  <div class="flex items-center gap-1">
+                    <button onclick="openEditConfigModal('Roof Type: RCC Flat Concrete Slab', 'Active Option', 'Site Audit Dropdown')" class="text-[8px] bg-white border border-gray-300 px-1.5 py-0.5 rounded font-bold text-gray-700">Edit</button>
+                    <button onclick="deleteConfigItem('Roof Type: RCC Flat Concrete Slab')" class="text-[8px] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded font-bold text-red-600">Delete</button>
+                  </div>
+                </div>
+
+                <div class="flex justify-between items-center" id="config-item-roof-tile">
+                  <span><strong>Roof Type:</strong> Traditional Kerala Sloped Clay Tile</span>
+                  <div class="flex items-center gap-1">
+                    <button onclick="openEditConfigModal('Roof Type: Traditional Kerala Sloped Clay Tile', 'Active Option', 'Site Audit Dropdown')" class="text-[8px] bg-white border border-gray-300 px-1.5 py-0.5 rounded font-bold text-gray-700">Edit</button>
+                    <button onclick="deleteConfigItem('Roof Type: Traditional Kerala Sloped Clay Tile')" class="text-[8px] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded font-bold text-red-600">Delete</button>
+                  </div>
+                </div>
+
+                <div class="flex justify-between items-center" id="config-item-shadow-trees">
+                  <span><strong>Shadow Check:</strong> Coconut / Mango Trees Obstacle</span>
+                  <div class="flex items-center gap-1">
+                    <button onclick="openEditConfigModal('Shadow Check: Coconut / Mango Trees', 'Active Checklist', 'Checklist Option')" class="text-[8px] bg-white border border-gray-300 px-1.5 py-0.5 rounded font-bold text-gray-700">Edit</button>
+                    <button onclick="deleteConfigItem('Shadow Check: Coconut / Mango Trees')" class="text-[8px] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded font-bold text-red-600">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Master Data Sub-Category 4: Enterprise Company Details -->
+            <div class="p-2.5 bg-slate-900 text-white rounded-xl space-y-1 text-[10px]">
+              <div class="flex justify-between items-center border-b border-slate-700 pb-1">
+                <span class="font-extrabold text-amber-400 flex items-center gap-1">🏛️ Enterprise Company Master Details</span>
+                <button onclick="openEditConfigModal('Sunrise Energy Solutions', 'Kozhikode HQ', 'Company Details')" class="text-[9px] bg-amber-500 text-slate-900 px-2 py-0.5 rounded font-black">Edit Profile</button>
+              </div>
+              <p><strong>Entity Name:</strong> Sunrise Energy Solutions Pvt Ltd</p>
+              <p><strong>HQ Address:</strong> Mavoor Road Junction, Kozhikode, Kerala 673001</p>
+              <p><strong>License:</strong> Class-A KSEB Solar Contractor #KSEB/CLT/2024/998</p>
+            </div>
           </div>
         `;
+        setTimeout(() => {
+          makeContainerSwipable(document.getElementById('owner-pills-bar'));
+        }, 100);
       } else if (activeUser.role === "Office Assistant") {
         newSurveyBtn.classList.add('hidden');
         container.innerHTML = `
@@ -925,6 +1360,100 @@
       document.getElementById('forgot-password-modal').classList.add('hidden');
     }
 
+    function openAssignStaffModal(siteName) {
+      const modal = document.getElementById('assign-staff-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        if (siteName) {
+          const siteSelect = document.getElementById('modal-site-select');
+          if (siteSelect) {
+            for (let i = 0; i < siteSelect.options.length; i++) {
+              if (siteSelect.options[i].value.toLowerCase().includes(siteName.toLowerCase()) || siteName.toLowerCase().includes(siteSelect.options[i].value.toLowerCase())) {
+                siteSelect.selectedIndex = i;
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    function closeAssignStaffModal() {
+      const modal = document.getElementById('assign-staff-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function submitStaffAssignment(e) {
+      e.preventDefault();
+      const site = document.getElementById('modal-site-select').value;
+      const panelCrew = document.getElementById('modal-panel-crew').value;
+      const electricalStaff = document.getElementById('modal-electrical-staff').value;
+      const maintenanceStaff = document.getElementById('modal-maintenance-staff').value;
+
+      closeAssignStaffModal();
+      showToastNotification(`⚡ Work Dispatched & Staff Assigned!\n• Site: ${site}\n• Panel: ${panelCrew}\n• Electrical: ${electricalStaff}\n• Service: ${maintenanceStaff}`);
+    }
+
+    function showToastNotification(message) {
+      let toast = document.getElementById('app-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'app-toast';
+        toast.className = 'fixed bottom-16 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs px-4 py-2.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-2 max-w-xs text-left transition-all duration-300 transform translate-y-4 opacity-0 pointer-events-none';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<span class="text-base">✅</span> <div class="font-medium whitespace-pre-line text-[11px]">${message}</div>`;
+      toast.classList.remove('translate-y-4', 'opacity-0', 'pointer-events-none');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0', 'pointer-events-none');
+      }, 4500);
+    }
+
+    function openEditConfigModal(label, val, cat) {
+      document.getElementById('edit-config-label').value = label;
+      document.getElementById('edit-config-val').value = val;
+      document.getElementById('edit-config-cat').value = cat || "General Master Setting";
+      document.getElementById('edit-config-modal').classList.remove('hidden');
+    }
+
+    function closeEditConfigModal() {
+      document.getElementById('edit-config-modal').classList.add('hidden');
+    }
+
+    function submitConfigEdit(e) {
+      e.preventDefault();
+      const label = document.getElementById('edit-config-label').value;
+      const val = document.getElementById('edit-config-val').value;
+      closeEditConfigModal();
+      showToastNotification(`⚙️ Master Config Updated!\n• Field: ${label}\n• New Setting/Rate: ${val}`);
+    }
+
+    function openAddConfigModal() {
+      document.getElementById('add-config-modal').classList.remove('hidden');
+    }
+
+    function closeAddConfigModal() {
+      document.getElementById('add-config-modal').classList.add('hidden');
+    }
+
+    function submitNewConfig(e) {
+      e.preventDefault();
+      const cat = document.getElementById('add-config-cat').value;
+      const label = document.getElementById('add-config-label').value;
+      const val = document.getElementById('add-config-val').value;
+      closeAddConfigModal();
+      showToastNotification(`✅ New Master Field Created!\n• Category: ${cat}\n• Option Label: ${label}\n• Rate/Value: ${val}`);
+    }
+
+    function deleteConfigItem(itemName) {
+      if (confirm(`Are you sure you want to delete "${itemName}" from app configurations?`)) {
+        showToastNotification(`🗑️ Master Field Deleted:\n"${itemName}" removed from system dropdowns.`);
+      }
+    }
+
     function filterOwnerSection(section) {
       const pills = document.querySelectorAll('.owner-pill');
       pills.forEach(p => {
@@ -952,8 +1481,36 @@
         } else if (section === 'payments') {
           document.getElementById('owner-sec-cashflow').classList.remove('hidden');
           document.getElementById('owner-sec-payments').classList.remove('hidden');
+        } else if (section === 'config') {
+          document.getElementById('owner-sec-config').classList.remove('hidden');
         }
       }
+    }
+
+    function makeContainerSwipable(container) {
+      if (!container) return;
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+      });
+      container.addEventListener('mouseleave', () => {
+        isDown = false;
+      });
+      container.addEventListener('mouseup', () => {
+        isDown = false;
+      });
+      container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2;
+        container.scrollLeft = scrollLeft - walk;
+      });
     }
   </script>
 </body>
