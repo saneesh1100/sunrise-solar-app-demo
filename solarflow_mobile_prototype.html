@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SolarFlow - Mobile App Prototype</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:#eef2f6;color:#17202a}
+.app{max-width:430px;margin:auto;min-height:100vh;background:#f7f9fb;position:relative;box-shadow:0 0 35px #0001}
+.top{height:62px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #e8edf2;position:sticky;top:0;z-index:5}
+.logo{font-weight:800;font-size:19px}.logo span{color:#17a7d8}.icon{font-size:20px}
+.content{padding:18px 16px 88px}.greet{font-size:13px;color:#718096}.title{font-size:24px;font-weight:800;margin:4px 0 16px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:#fff;border:1px solid #e8edf2;border-radius:14px;padding:15px;box-shadow:0 2px 8px #00000008}.num{font-size:25px;font-weight:800}.label{font-size:12px;color:#718096;margin-top:4px}
+.section{font-size:15px;font-weight:800;margin:22px 0 10px}.task{display:flex;gap:12px;align-items:center;margin-bottom:9px}.avatar{width:40px;height:40px;border-radius:12px;background:#e9f7fc;display:grid;place-items:center}.task .card{flex:1;padding:12px}.small{font-size:12px;color:#718096}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:70px;background:#fff;border-top:1px solid #e8edf2;display:flex;justify-content:space-around;align-items:center;z-index:10}.nav{font-size:11px;color:#718096;text-align:center}.nav b{display:block;font-size:20px;margin-bottom:3px}.nav.active{color:#0797c7}
+button{border:0;border-radius:12px;padding:13px 16px;font-weight:700;cursor:pointer}.primary{background:#10a7d7;color:white}.secondary{background:#edf2f7;color:#334155}.full{width:100%}.row{display:flex;gap:9px}.row>*{flex:1}
+.hidden{display:none}.screen-title{font-size:21px;font-weight:800;margin:4px 0 16px}.back{font-size:13px;color:#0b91bd;cursor:pointer;margin-bottom:12px}
+label{display:block;font-size:12px;font-weight:700;color:#52606d;margin:13px 0 6px}input,select,textarea{width:100%;border:1px solid #dce3e9;border-radius:10px;padding:12px;background:#fff;font-size:14px}textarea{min-height:75px}.step{display:flex;gap:5px;margin-bottom:18px}.dot{height:5px;flex:1;background:#dfe7ed;border-radius:5px}.dot.on{background:#10a7d7}
+.option{border:1px solid #dce3e9;padding:13px;border-radius:11px;margin:8px 0;background:#fff}.option.selected{border:2px solid #10a7d7;background:#f0fbfe}.price{display:flex;justify-content:space-between;padding:9px 0;font-size:14px}.total{font-size:21px;font-weight:800;border-top:1px solid #e3e8ed;padding-top:13px}
+.role{display:grid;grid-template-columns:1fr 1fr;gap:10px}.role button{background:#fff;border:1px solid #dce3e9;text-align:left}.role button.active{border:2px solid #10a7d7}
+.badge{font-size:10px;background:#e8f7fc;color:#078ab6;border-radius:20px;padding:4px 7px}.status{display:flex;justify-content:space-between;align-items:center}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><div class="logo">Solar<span>Flow</span></div><div class="icon">🔔</div></div>
+
+  <main class="content">
+    <section id="dashboard">
+      <div class="greet">Good morning, Saneesh</div><div class="title">Dashboard</div>
+      <div class="cards">
+        <div class="card"><div class="num">24</div><div class="label">New Leads</div></div>
+        <div class="card"><div class="num">12</div><div class="label">Proposals</div></div>
+        <div class="card"><div class="num">6</div><div class="label">Installations</div></div>
+        <div class="card"><div class="num">4</div><div class="label">Service Jobs</div></div>
+      </div>
+      <div class="section">Quick Actions</div>
+      <div class="row"><button class="primary" onclick="show('customer')">＋ Customer</button><button class="secondary" onclick="show('proposal')">＋ Proposal</button></div>
+      <div class="section">Today's Tasks</div>
+      <div class="task"><div class="avatar">📍</div><div class="card"><b>Site Survey</b><div>Rajesh Kumar · 10:30 AM</div><span class="small">Kozhikode</span></div></div>
+      <div class="task"><div class="avatar">⚡</div><div class="card"><b>Installation</b><div>Fathima · 2:00 PM</div><span class="small">5 kW Hybrid</span></div></div>
+      <div class="section">Recent Proposals</div>
+      <div class="card status"><div><b>Rajesh Kumar</b><div class="small">5.5 kWp Hybrid</div></div><span class="badge">Sent</span></div>
+    </section>
+
+    <section id="customer" class="hidden">
+      <div class="back" onclick="show('dashboard')">← Dashboard</div><div class="screen-title">New Customer</div>
+      <div class="step"><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div>
+      <label>Customer Name *</label><input placeholder="Enter full name">
+      <label>Mobile Number *</label><input type="tel" placeholder="+91">
+      <label>WhatsApp Number</label><input type="tel" placeholder="+91">
+      <label>Email</label><input type="email" placeholder="customer@email.com">
+      <label>Address</label><textarea placeholder="House / street / landmark"></textarea>
+      <div class="row"><div><label>City</label><input placeholder="Kozhikode"></div><div><label>PIN Code</label><input placeholder="673xxx"></div></div>
+      <label>Customer Type</label><select><option>Residential</option><option>Commercial</option><option>Industrial</option></select>
+      <button class="primary full" style="margin-top:18px" onclick="show('electricity')">Save & Continue →</button>
+    </section>
+
+    <section id="electricity" class="hidden">
+      <div class="back" onclick="show('customer')">← Customer</div><div class="screen-title">Electricity Details</div>
+      <div class="step"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div>
+      <label>Electricity Board</label><select><option>KSEB</option><option>TNEB</option><option>BESCOM</option><option>Other</option></select>
+      <label>Consumer Number</label><input placeholder="Consumer number">
+      <label>Connection Type</label><select><option>Single Phase</option><option>Three Phase</option></select>
+      <label>Sanctioned Load</label><input type="number" placeholder="kW">
+      <label>Average Monthly Bill</label><input type="number" placeholder="₹">
+      <label>Average Monthly Consumption</label><input type="number" placeholder="kWh">
+      <label>Electricity Bill</label><button class="secondary full">📎 Upload Bill</button>
+      <button class="primary full" style="margin-top:18px" onclick="show('proposal')">Save & Continue →</button>
+    </section>
+
+    <section id="proposal" class="hidden">
+      <div class="back" onclick="show('dashboard')">← Dashboard</div><div class="screen-title">Create Proposal</div>
+      <div class="step"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></div>
+      <label>Customer</label><select><option>Rajesh Kumar</option><option>Fathima</option><option>New Customer</option></select>
+      <label>System Type</label>
+      <div class="option selected" onclick="pick(this)">☀️ <b>On-Grid</b><div class="small">Best for bill reduction</div></div>
+      <div class="option" onclick="pick(this)">🔋 <b>Hybrid</b><div class="small">Solar + battery + grid backup</div></div>
+      <div class="option" onclick="pick(this)">🏠 <b>Off-Grid</b><div class="small">For locations without reliable grid</div></div>
+      <label>Recommended Solar Capacity</label><div class="row"><input id="kw" type="number" value="5.5" step=".1"><select><option>kWp</option><option>kW</option></select></div>
+      <label>Solar Panel</label><select><option>550 W Mono — Adani</option><option>545 W Mono — Waaree</option><option>540 W Mono — Tata</option></select>
+      <label>Panel Quantity</label><input id="panels" type="number" value="10" oninput="calc()">
+      <label>Inverter</label><select><option>5 kW Hybrid — Growatt</option><option>5 kW Hybrid — Deye</option><option>5 kW On-Grid — Sungrow</option><option>5 kW On-Grid — Solis</option></select>
+      <label>Battery</label><select><option>Not Required</option><option>5.12 kWh LiFePO₄</option><option>10.24 kWh LiFePO₄</option></select>
+      <label>Backup Required</label><select><option>No</option><option>Yes — 4 hours</option><option>Yes — 8 hours</option></select>
+      <button class="primary full" style="margin-top:18px" onclick="show('pricing')">Continue to Pricing →</button>
+    </section>
+
+    <section id="pricing" class="hidden">
+      <div class="back" onclick="show('proposal')">← System Configuration</div><div class="screen-title">Proposal Pricing</div>
+      <div class="card">
+        <div class="price"><span>Solar Panels</span><b>₹1,20,000</b></div>
+        <div class="price"><span>Inverter</span><b>₹65,000</b></div>
+        <div class="price"><span>Battery</span><b>₹0</b></div>
+        <div class="price"><span>Mounting Structure</span><b>₹45,000</b></div>
+        <div class="price"><span>Installation</span><b>₹30,000</b></div>
+        <div class="price"><span>Electrical Work</span><b>₹20,000</b></div>
+        <label>Discount</label><input type="number" value="20000">
+        <div class="price"><span>Sub Total</span><b>₹2,80,000</b></div>
+        <div class="price"><span>Estimated Subsidy</span><b>- ₹78,000</b></div>
+        <div class="total"><span>Customer Price</span><span>₹2,02,000</span></div>
+      </div>
+      <label>Payment Terms</label><select><option>50% Advance / 40% Installation / 10% Completion</option><option>100% Advance</option><option>Custom</option></select>
+      <button class="primary full" style="margin-top:18px" onclick="alert('Proposal generated successfully!')">📄 Generate Proposal PDF</button>
+      <button class="secondary full" style="margin-top:9px" onclick="alert('WhatsApp proposal preview opened!')">💬 Send via WhatsApp</button>
+    </section>
+
+    <section id="jobs" class="hidden">
+      <div class="title">Jobs</div>
+      <div class="cards"><div class="card"><div class="num">6</div><div class="label">Installation</div></div><div class="card"><div class="num">4</div><div class="label">Maintenance</div></div></div>
+      <div class="section">Assigned Today</div>
+      <div class="card" style="margin-bottom:10px"><b>⚡ Fathima — 5 kW Hybrid</b><div class="small">Electrical team · 2:00 PM</div><button class="primary" style="margin-top:10px" onclick="alert('Job opened')">Open Job</button></div>
+      <div class="card"><b>🔧 Mohammed — Service</b><div class="small">Inverter inspection · 4:30 PM</div><button class="secondary" style="margin-top:10px" onclick="alert('Service ticket opened')">Open Ticket</button></div>
+    </section>
+  </main>
+
+  <nav class="bottom">
+    <div class="nav active" onclick="show('dashboard')"><b>⌂</b>Home</div>
+    <div class="nav" onclick="show('customer')"><b>👥</b>Customers</div>
+    <div class="nav" onclick="show('proposal')"><b>＋</b>Proposal</div>
+    <div class="nav" onclick="show('jobs')"><b>✓</b>Jobs</div>
+    <div class="nav" onclick="alert('Profile / Settings')"><b>☻</b>Profile</div>
+  </nav>
+</div>
+<script>
+function show(id){
+ document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden'); window.scrollTo(0,0);
+}
+function pick(el){document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));el.classList.add('selected')}
+function calc(){let p=+document.getElementById('panels').value||0;document.getElementById('kw').value=(p*.55).toFixed(2)}
+</script>
+</body>
+</html>
