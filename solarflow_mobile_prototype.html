@@ -1,134 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SolarFlow - Mobile App Prototype</title>
-<style>
-*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:#eef2f6;color:#17202a}
-.app{max-width:430px;margin:auto;min-height:100vh;background:#f7f9fb;position:relative;box-shadow:0 0 35px #0001}
-.top{height:62px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #e8edf2;position:sticky;top:0;z-index:5}
-.logo{font-weight:800;font-size:19px}.logo span{color:#17a7d8}.icon{font-size:20px}
-.content{padding:18px 16px 88px}.greet{font-size:13px;color:#718096}.title{font-size:24px;font-weight:800;margin:4px 0 16px}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:#fff;border:1px solid #e8edf2;border-radius:14px;padding:15px;box-shadow:0 2px 8px #00000008}.num{font-size:25px;font-weight:800}.label{font-size:12px;color:#718096;margin-top:4px}
-.section{font-size:15px;font-weight:800;margin:22px 0 10px}.task{display:flex;gap:12px;align-items:center;margin-bottom:9px}.avatar{width:40px;height:40px;border-radius:12px;background:#e9f7fc;display:grid;place-items:center}.task .card{flex:1;padding:12px}.small{font-size:12px;color:#718096}
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:70px;background:#fff;border-top:1px solid #e8edf2;display:flex;justify-content:space-around;align-items:center;z-index:10}.nav{font-size:11px;color:#718096;text-align:center}.nav b{display:block;font-size:20px;margin-bottom:3px}.nav.active{color:#0797c7}
-button{border:0;border-radius:12px;padding:13px 16px;font-weight:700;cursor:pointer}.primary{background:#10a7d7;color:white}.secondary{background:#edf2f7;color:#334155}.full{width:100%}.row{display:flex;gap:9px}.row>*{flex:1}
-.hidden{display:none}.screen-title{font-size:21px;font-weight:800;margin:4px 0 16px}.back{font-size:13px;color:#0b91bd;cursor:pointer;margin-bottom:12px}
-label{display:block;font-size:12px;font-weight:700;color:#52606d;margin:13px 0 6px}input,select,textarea{width:100%;border:1px solid #dce3e9;border-radius:10px;padding:12px;background:#fff;font-size:14px}textarea{min-height:75px}.step{display:flex;gap:5px;margin-bottom:18px}.dot{height:5px;flex:1;background:#dfe7ed;border-radius:5px}.dot.on{background:#10a7d7}
-.option{border:1px solid #dce3e9;padding:13px;border-radius:11px;margin:8px 0;background:#fff}.option.selected{border:2px solid #10a7d7;background:#f0fbfe}.price{display:flex;justify-content:space-between;padding:9px 0;font-size:14px}.total{font-size:21px;font-weight:800;border-top:1px solid #e3e8ed;padding-top:13px}
-.role{display:grid;grid-template-columns:1fr 1fr;gap:10px}.role button{background:#fff;border:1px solid #dce3e9;text-align:left}.role button.active{border:2px solid #10a7d7}
-.badge{font-size:10px;background:#e8f7fc;color:#078ab6;border-radius:20px;padding:4px 7px}.status{display:flex;justify-content:space-between;align-items:center}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarFlow - Field Team Mobile Application</title>
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F8FAFC;
+      color: #1F2937;
+      margin: 0;
+      padding: 0;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .mobile-tab-content.hidden { display: none; }
+  </style>
 </head>
-<body>
-<div class="app">
-  <div class="top"><div class="logo">Solar<span>Flow</span></div><div class="icon">🔔</div></div>
 
-  <main class="content">
-    <section id="dashboard">
-      <div class="greet">Good morning, Saneesh</div><div class="title">Dashboard</div>
-      <div class="cards">
-        <div class="card"><div class="num">24</div><div class="label">New Leads</div></div>
-        <div class="card"><div class="num">12</div><div class="label">Proposals</div></div>
-        <div class="card"><div class="num">6</div><div class="label">Installations</div></div>
-        <div class="card"><div class="num">4</div><div class="label">Service Jobs</div></div>
+<body class="bg-gray-100 min-h-screen flex justify-center items-center p-0 sm:p-4">
+
+  <!-- Mobile Phone Frame -->
+  <div class="w-full sm:max-w-[410px] bg-white min-h-screen sm:min-h-[820px] sm:rounded-[36px] sm:shadow-2xl overflow-hidden flex flex-col relative border border-gray-200">
+    
+    <!-- Top App Header -->
+    <header class="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-30 flex items-center justify-between shadow-2xs">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-blue-600 text-white font-black flex items-center justify-center text-sm shadow-xs">
+          <i class="fa-solid fa-solar-panel"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-sm text-gray-900 block leading-tight">SolarFlow Mobile</span>
+          <span class="text-[10px] text-gray-500">Field Operations System</span>
+        </div>
       </div>
-      <div class="section">Quick Actions</div>
-      <div class="row"><button class="primary" onclick="show('customer')">＋ Customer</button><button class="secondary" onclick="show('proposal')">＋ Proposal</button></div>
-      <div class="section">Today's Tasks</div>
-      <div class="task"><div class="avatar">📍</div><div class="card"><b>Site Survey</b><div>Rajesh Kumar · 10:30 AM</div><span class="small">Kozhikode</span></div></div>
-      <div class="task"><div class="avatar">⚡</div><div class="card"><b>Installation</b><div>Fathima · 2:00 PM</div><span class="small">5 kW Hybrid</span></div></div>
-      <div class="section">Recent Proposals</div>
-      <div class="card status"><div><b>Rajesh Kumar</b><div class="small">5.5 kWp Hybrid</div></div><span class="badge">Sent</span></div>
-    </section>
 
-    <section id="customer" class="hidden">
-      <div class="back" onclick="show('dashboard')">← Dashboard</div><div class="screen-title">New Customer</div>
-      <div class="step"><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div>
-      <label>Customer Name *</label><input placeholder="Enter full name">
-      <label>Mobile Number *</label><input type="tel" placeholder="+91">
-      <label>WhatsApp Number</label><input type="tel" placeholder="+91">
-      <label>Email</label><input type="email" placeholder="customer@email.com">
-      <label>Address</label><textarea placeholder="House / street / landmark"></textarea>
-      <div class="row"><div><label>City</label><input placeholder="Kozhikode"></div><div><label>PIN Code</label><input placeholder="673xxx"></div></div>
-      <label>Customer Type</label><select><option>Residential</option><option>Commercial</option><option>Industrial</option></select>
-      <button class="primary full" style="margin-top:18px" onclick="show('electricity')">Save & Continue →</button>
-    </section>
+      <!-- Role Switcher Dropdown -->
+      <select id="mobileRoleSelector" onchange="switchMobileRole(this.value)" class="bg-blue-50 border border-blue-200 font-bold text-[11px] text-blue-700 rounded-lg px-2 py-1 focus:outline-none cursor-pointer">
+        <option value="truss" selected>🏗️ Truss Team Lead</option>
+        <option value="truss_member">🔨 Truss Tech</option>
+        <option value="elec">⚡ Electrical Lead</option>
+        <option value="elec_member">🔌 Wireman Tech</option>
+        <option value="maint">🔧 AMC Service Lead</option>
+        <option value="sales">💼 Sales Executive</option>
+      </select>
+    </header>
 
-    <section id="electricity" class="hidden">
-      <div class="back" onclick="show('customer')">← Customer</div><div class="screen-title">Electricity Details</div>
-      <div class="step"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div>
-      <label>Electricity Board</label><select><option>KSEB</option><option>TNEB</option><option>BESCOM</option><option>Other</option></select>
-      <label>Consumer Number</label><input placeholder="Consumer number">
-      <label>Connection Type</label><select><option>Single Phase</option><option>Three Phase</option></select>
-      <label>Sanctioned Load</label><input type="number" placeholder="kW">
-      <label>Average Monthly Bill</label><input type="number" placeholder="₹">
-      <label>Average Monthly Consumption</label><input type="number" placeholder="kWh">
-      <label>Electricity Bill</label><button class="secondary full">📎 Upload Bill</button>
-      <button class="primary full" style="margin-top:18px" onclick="show('proposal')">Save & Continue →</button>
-    </section>
+    <!-- Main Content Screens -->
+    <main class="flex-1 p-4 space-y-4 overflow-y-auto pb-24">
+      
+      <!-- SCREEN 1: JOBS / WORK ORDERS -->
+      <div id="screen-jobs" class="mobile-tab-content space-y-4">
+        
+        <!-- Welcome Header Banner -->
+        <div class="p-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-2xl shadow-sm space-y-1">
+          <p class="text-[11px] font-medium text-blue-100" id="fieldUserGreeting">Good morning, Kiran M.</p>
+          <h2 class="text-base font-extrabold" id="fieldRoleHeader">Assigned Structural Work Orders</h2>
+          <p class="text-[11px] text-blue-100">Tap site to update progress, capture photo proof, and submit for CRM review.</p>
+        </div>
 
-    <section id="proposal" class="hidden">
-      <div class="back" onclick="show('dashboard')">← Dashboard</div><div class="screen-title">Create Proposal</div>
-      <div class="step"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></div>
-      <label>Customer</label><select><option>Rajesh Kumar</option><option>Fathima</option><option>New Customer</option></select>
-      <label>System Type</label>
-      <div class="option selected" onclick="pick(this)">☀️ <b>On-Grid</b><div class="small">Best for bill reduction</div></div>
-      <div class="option" onclick="pick(this)">🔋 <b>Hybrid</b><div class="small">Solar + battery + grid backup</div></div>
-      <div class="option" onclick="pick(this)">🏠 <b>Off-Grid</b><div class="small">For locations without reliable grid</div></div>
-      <label>Recommended Solar Capacity</label><div class="row"><input id="kw" type="number" value="5.5" step=".1"><select><option>kWp</option><option>kW</option></select></div>
-      <label>Solar Panel</label><select><option>550 W Mono — Adani</option><option>545 W Mono — Waaree</option><option>540 W Mono — Tata</option></select>
-      <label>Panel Quantity</label><input id="panels" type="number" value="10" oninput="calc()">
-      <label>Inverter</label><select><option>5 kW Hybrid — Growatt</option><option>5 kW Hybrid — Deye</option><option>5 kW On-Grid — Sungrow</option><option>5 kW On-Grid — Solis</option></select>
-      <label>Battery</label><select><option>Not Required</option><option>5.12 kWh LiFePO₄</option><option>10.24 kWh LiFePO₄</option></select>
-      <label>Backup Required</label><select><option>No</option><option>Yes — 4 hours</option><option>Yes — 8 hours</option></select>
-      <button class="primary full" style="margin-top:18px" onclick="show('pricing')">Continue to Pricing →</button>
-    </section>
+        <!-- System Rule Banner -->
+        <div class="p-3 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs space-y-1">
+          <div class="flex items-center gap-1.5 font-bold">
+            <i class="fa-solid fa-lock text-amber-600"></i> Field Submission Rule:
+          </div>
+          <p class="text-[11px] text-amber-800">
+            Field teams cannot edit submitted work. Submissions require review by <strong>CRM / Admin</strong>.
+          </p>
+        </div>
 
-    <section id="pricing" class="hidden">
-      <div class="back" onclick="show('proposal')">← System Configuration</div><div class="screen-title">Proposal Pricing</div>
-      <div class="card">
-        <div class="price"><span>Solar Panels</span><b>₹1,20,000</b></div>
-        <div class="price"><span>Inverter</span><b>₹65,000</b></div>
-        <div class="price"><span>Battery</span><b>₹0</b></div>
-        <div class="price"><span>Mounting Structure</span><b>₹45,000</b></div>
-        <div class="price"><span>Installation</span><b>₹30,000</b></div>
-        <div class="price"><span>Electrical Work</span><b>₹20,000</b></div>
-        <label>Discount</label><input type="number" value="20000">
-        <div class="price"><span>Sub Total</span><b>₹2,80,000</b></div>
-        <div class="price"><span>Estimated Subsidy</span><b>- ₹78,000</b></div>
-        <div class="total"><span>Customer Price</span><span>₹2,02,000</span></div>
+        <!-- Assigned Job Card 1 -->
+        <div class="p-4 bg-white border border-gray-200 rounded-2xl space-y-3 shadow-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-xs text-gray-900">Project #PRJ-88 — Dr. Radhakrishnan</span>
+            <span class="status-badge bg-blue-50 text-blue-700" id="jobStageBadge">Truss Stage</span>
+          </div>
+
+          <!-- Customer Phone & Address (Explicitly Allowed for Field Teams) -->
+          <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl text-xs space-y-2">
+            <div class="flex items-center justify-between font-semibold text-gray-800">
+              <span><i class="fa-solid fa-phone text-blue-600 mr-1"></i> +91 98470 12345</span>
+              <a href="tel:+919847012345" class="px-2.5 py-1 bg-blue-600 text-white text-[10px] rounded-lg font-bold shadow-2xs">Call Customer</a>
+            </div>
+            <div class="flex items-center justify-between text-gray-600 text-[11px]">
+              <span><i class="fa-solid fa-location-dot text-rose-600 mr-1"></i> Villa #12, Rose Gardens, Edappally</span>
+              <button onclick="alert('Opening Google Maps route navigation to Edappally, Kochi...')" class="text-blue-600 font-bold hover:underline">Route 🗺️</button>
+            </div>
+          </div>
+
+          <!-- Barcode Serial Scanner Widget (Visible for Electrical Team) -->
+          <div id="serialScanWidget" class="hidden p-3 bg-blue-50 border border-blue-200 rounded-xl space-y-2 text-xs">
+            <span class="font-bold text-blue-900 block"><i class="fa-solid fa-barcode text-blue-600 mr-1"></i> DCR Panel & Inverter Barcode Serial Scanner</span>
+            <div class="flex gap-2">
+              <input type="text" id="panelSerialInput" placeholder="Scan panel barcode..." value="WAA-2026-DCR-884910" class="flex-1 text-xs p-2 border border-blue-300 rounded-lg bg-white font-mono" />
+              <button onclick="scanBarcode()" class="px-3 py-2 bg-blue-600 text-white font-bold text-xs rounded-lg shadow-2xs">Scan</button>
+            </div>
+            <div class="text-[10px] text-blue-700 font-semibold" id="serialScanCount">Scanned: 10 of 10 Panels Verified ✓</div>
+          </div>
+
+          <!-- Checklist Tasks -->
+          <div class="space-y-1.5 text-xs">
+            <label class="font-bold text-gray-700 block">Field Checklist Tasks:</label>
+            <label class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 text-blue-600 rounded" />
+              <span id="chkTask1">Verify roof structural anchoring torque</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 text-blue-600 rounded" />
+              <span id="chkTask2">Complete frame elevation & levelling</span>
+            </label>
+          </div>
+
+          <!-- Camera Capture Action -->
+          <div class="space-y-2 text-xs">
+            <label class="font-bold text-gray-700 block">Site Progress Photo Proof</label>
+            <button onclick="triggerCamera()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-xs">
+              <i class="fa-solid fa-camera"></i> Capture Geotagged Photo
+            </button>
+            <div id="photoPreviewGallery" class="hidden p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1.5 text-xs text-emerald-800">
+              <div class="flex items-center gap-2 font-bold"><i class="fa-solid fa-circle-check text-emerald-600"></i> Photo Captured & Stamped</div>
+              <div class="text-[10px] text-emerald-700">GPS: Lat 9.9816° N, Long 76.2999° E • Timestamp: 19 Sep 2026, 03:40 PM</div>
+            </div>
+          </div>
+
+          <!-- Remarks -->
+          <textarea placeholder="Enter technical observations / site remarks..." class="w-full p-2.5 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-blue-600">Site work completed as per technical drawings. Ready for inspection.</textarea>
+
+          <!-- Submit Button -->
+          <button onclick="submitFieldWork()" id="btnFieldSubmit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition shadow-xs">
+            Submit Work for CRM Review (Lock Edit)
+          </button>
+        </div>
+
       </div>
-      <label>Payment Terms</label><select><option>50% Advance / 40% Installation / 10% Completion</option><option>100% Advance</option><option>Custom</option></select>
-      <button class="primary full" style="margin-top:18px" onclick="alert('Proposal generated successfully!')">📄 Generate Proposal PDF</button>
-      <button class="secondary full" style="margin-top:9px" onclick="alert('WhatsApp proposal preview opened!')">💬 Send via WhatsApp</button>
-    </section>
 
-    <section id="jobs" class="hidden">
-      <div class="title">Jobs</div>
-      <div class="cards"><div class="card"><div class="num">6</div><div class="label">Installation</div></div><div class="card"><div class="num">4</div><div class="label">Maintenance</div></div></div>
-      <div class="section">Assigned Today</div>
-      <div class="card" style="margin-bottom:10px"><b>⚡ Fathima — 5 kW Hybrid</b><div class="small">Electrical team · 2:00 PM</div><button class="primary" style="margin-top:10px" onclick="alert('Job opened')">Open Job</button></div>
-      <div class="card"><b>🔧 Mohammed — Service</b><div class="small">Inverter inspection · 4:30 PM</div><button class="secondary" style="margin-top:10px" onclick="alert('Service ticket opened')">Open Ticket</button></div>
-    </section>
-  </main>
+      <!-- SCREEN 2: MOBILE SITE AUDIT STEPPER -->
+      <div id="screen-audit" class="mobile-tab-content space-y-4 hidden">
+        <div class="p-4 bg-white border border-gray-200 rounded-2xl space-y-3 shadow-xs text-xs">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+            <h3 class="font-extrabold text-sm text-gray-900">📋 Technical Site Audit (Mobile View)</h3>
+            <span class="text-[10px] bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded">6 Steps</span>
+          </div>
 
-  <nav class="bottom">
-    <div class="nav active" onclick="show('dashboard')"><b>⌂</b>Home</div>
-    <div class="nav" onclick="show('customer')"><b>👥</b>Customers</div>
-    <div class="nav" onclick="show('proposal')"><b>＋</b>Proposal</div>
-    <div class="nav" onclick="show('jobs')"><b>✓</b>Jobs</div>
-    <div class="nav" onclick="alert('Profile / Settings')"><b>☻</b>Profile</div>
-  </nav>
-</div>
-<script>
-function show(id){
- document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));
- document.getElementById(id).classList.remove('hidden'); window.scrollTo(0,0);
-}
-function pick(el){document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));el.classList.add('selected')}
-function calc(){let p=+document.getElementById('panels').value||0;document.getElementById('kw').value=(p*.55).toFixed(2)}
-</script>
+          <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl space-y-2">
+            <span class="font-bold text-amber-900 block text-xs">Active Audit: Dr. Radhakrishnan (Aluva)</span>
+            <div class="grid grid-cols-2 gap-2 text-[11px] text-amber-800">
+              <div>System: <strong>5.5 kW DCR</strong></div>
+              <div>Roof: <strong>RCC Flat 450 sqft</strong></div>
+              <div>Consumer ID: <strong>11554890214</strong></div>
+              <div>EB Phase: <strong>3-Phase 8kW</strong></div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label class="font-bold text-gray-700 block">Mobile Document Quick Check:</label>
+            <div class="grid grid-cols-2 gap-2 text-[11px]">
+              <div class="p-2 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 font-semibold">✓ Aadhaar Card</div>
+              <div class="p-2 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 font-semibold">✓ PAN Card</div>
+              <div class="p-2 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 font-semibold">✓ KSEB EB Bill</div>
+              <div class="p-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-800 font-semibold">⏳ Bank Passbook</div>
+            </div>
+          </div>
+
+          <button onclick="alert('Opening Full 6-Step Technical Site Audit Form on Mobile...')" class="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs">
+            Edit Full Technical Audit Form
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: PROPOSAL (FOR SALES MOBILE MODE) -->
+      <div id="screen-proposal" class="mobile-tab-content space-y-4 hidden">
+        <div class="p-4 bg-white border border-gray-200 rounded-2xl space-y-3 shadow-xs text-xs">
+          <h3 class="font-extrabold text-sm text-gray-900">Mobile Proposal Configurator</h3>
+          <div>
+            <label class="font-bold text-gray-700 block mb-1">Select Customer</label>
+            <select class="w-full p-2 border border-gray-300 rounded-lg bg-white font-medium">
+              <option>Dr. Radhakrishnan (Aluva)</option>
+              <option>Vembanad Resorts (Kumarakom)</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-bold text-gray-700 block mb-1">System Capacity (kW)</label>
+            <input type="number" value="5.5" class="w-full p-2 border border-gray-300 rounded-lg font-bold text-blue-700" />
+          </div>
+          <div class="p-3 bg-blue-50 rounded-xl space-y-1.5 border border-blue-200">
+            <div class="flex justify-between font-bold text-gray-800"><span>Gross System Cost:</span><span>₹3,63,000</span></div>
+            <div class="flex justify-between text-emerald-700 font-bold"><span>PM Surya Ghar Subsidy:</span><span>- ₹78,000</span></div>
+            <div class="flex justify-between font-extrabold text-sm text-blue-900 pt-1.5 border-t border-blue-200"><span>Net Customer Payable:</span><span>₹2,85,000</span></div>
+          </div>
+          <button onclick="alert('Proposal generated! Proposal preview sent to customer WhatsApp number +91 98470 12345.')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-xs">
+            <i class="fa-brands fa-whatsapp text-lg"></i> Share Proposal via WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: MAINTENANCE & AMC TICKETS -->
+      <div id="screen-amc" class="mobile-tab-content space-y-4 hidden">
+        <div class="p-4 bg-white border border-gray-200 rounded-2xl space-y-3 shadow-xs text-xs">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+            <h3 class="font-extrabold text-sm text-gray-900">🔧 Service & Maintenance Ticket #TKT-402</h3>
+            <span class="status-badge bg-rose-50 text-rose-700">Open Ticket</span>
+          </div>
+
+          <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl space-y-1.5 text-rose-900">
+            <div class="font-bold text-xs">Inverter E-04 Grid Voltage Fault</div>
+            <p class="text-[11px] text-rose-800">Customer reported grid trip warning on Growatt 5kW string inverter.</p>
+          </div>
+
+          <div class="space-y-2">
+            <label class="font-bold text-gray-700 block">Service Checklist:</label>
+            <label class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 text-blue-600 rounded" />
+              <span>Inspect AC/DC Surge Protection Device (SPD)</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 text-blue-600 rounded" />
+              <span>Clean solar panel surface dust layer</span>
+            </label>
+          </div>
+
+          <button onclick="alert('Maintenance ticket resolved and closed. Customer notification sent.')" class="w-full py-2.5 bg-emerald-600 text-white font-bold rounded-xl shadow-xs">
+            Mark Service Completed & Close Ticket
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="absolute bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-200 flex justify-around items-center px-2 z-40">
+      <button onclick="showMobileScreen('jobs')" id="mobNavJobs" class="text-center text-blue-600 font-bold text-[10px]">
+        <i class="fa-solid fa-briefcase text-base block mb-0.5"></i>
+        <span>My Jobs</span>
+      </button>
+      <button onclick="showMobileScreen('audit')" id="mobNavAudit" class="text-center text-gray-400 font-bold text-[10px]">
+        <i class="fa-solid fa-clipboard-check text-base block mb-0.5"></i>
+        <span>Audit</span>
+      </button>
+      <button onclick="showMobileScreen('proposal')" id="mobNavProposal" class="text-center text-gray-400 font-bold text-[10px]">
+        <i class="fa-solid fa-calculator text-base block mb-0.5"></i>
+        <span>Proposal</span>
+      </button>
+      <button onclick="showMobileScreen('amc')" id="mobNavAmc" class="text-center text-gray-400 font-bold text-[10px]">
+        <i class="fa-solid fa-screwdriver-wrench text-base block mb-0.5"></i>
+        <span>AMC Service</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script>
+    function switchMobileRole(role) {
+      const greeting = document.getElementById('fieldUserGreeting');
+      const header = document.getElementById('fieldRoleHeader');
+      const badge = document.getElementById('jobStageBadge');
+      const serialWidget = document.getElementById('serialScanWidget');
+      const task1 = document.getElementById('chkTask1');
+      const task2 = document.getElementById('chkTask2');
+
+      if (role === 'truss' || role === 'truss_member') {
+        greeting.innerText = 'Good morning, Kiran M.';
+        header.innerText = 'Assigned Structural Work Orders';
+        badge.innerText = 'Truss Stage';
+        serialWidget.classList.add('hidden');
+        if (task1) task1.innerText = 'Verify roof structural anchoring torque';
+        if (task2) task2.innerText = 'Complete frame elevation & levelling';
+      } else if (role === 'elec' || role === 'elec_member') {
+        greeting.innerText = 'Good morning, Rahul V.';
+        header.innerText = 'Assigned Electrical & Panel Mounting';
+        badge.innerText = 'Electrical Stage';
+        serialWidget.classList.remove('hidden');
+        if (task1) task1.innerText = 'Scan panel DCR serial barcodes';
+        if (task2) task2.innerText = 'Test AC/DC earthing & inverter connection';
+      } else if (role === 'maint') {
+        greeting.innerText = 'Good morning, Vipin Raj';
+        header.innerText = 'Assigned AMC & Service Tickets';
+        badge.innerText = 'Service Ticket';
+        serialWidget.classList.add('hidden');
+        if (task1) task1.innerText = 'Inspect Growatt inverter voltage logs';
+        if (task2) task2.innerText = 'Clean solar panel array surface';
+      } else {
+        greeting.innerText = 'Good morning, Jeeva P.';
+        header.innerText = 'Assigned Customer Sales Leads';
+        badge.innerText = 'Sales Lead';
+        serialWidget.classList.add('hidden');
+        if (task1) task1.innerText = 'Verify site audit requirements';
+        if (task2) task2.innerText = 'Discuss 5kW DCR proposal with client';
+      }
+    }
+
+    function showMobileScreen(screenId) {
+      document.querySelectorAll('.mobile-tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`screen-${screenId}`).classList.remove('hidden');
+      
+      const navIds = ['jobs', 'audit', 'proposal', 'amc'];
+      navIds.forEach(id => {
+        const btn = document.getElementById(`mobNav${id.charAt(0).toUpperCase() + id.slice(1)}`);
+        if (btn) {
+          btn.className = id === screenId ? 'text-center text-blue-600 font-bold text-[10px]' : 'text-center text-gray-400 font-bold text-[10px]';
+        }
+      });
+    }
+
+    function scanBarcode() {
+      alert('Barcode Scanner Active! Panel serial WAA-2026-DCR-884910 scanned & verified for MNRE submission.');
+    }
+
+    function triggerCamera() {
+      document.getElementById('photoPreviewGallery').classList.remove('hidden');
+      alert('Camera Captured: 1 High-Res Photo (Geotagged Lat 9.9816° N, Long 76.2999° E, Timestamped 19 Sep 2026, 03:40 PM)');
+    }
+
+    function submitFieldWork() {
+      const btn = document.getElementById('btnFieldSubmit');
+      btn.className = 'w-full py-2.5 bg-gray-200 text-gray-600 font-bold text-xs rounded-xl cursor-not-allowed';
+      btn.innerText = 'Submitted ✓ (Awaiting CRM / Owner Review)';
+      btn.disabled = true;
+      alert('Work order submitted to CRM/Owner review queue. Editing has been locked as per system rule.');
+    }
+  </script>
 </body>
 </html>
